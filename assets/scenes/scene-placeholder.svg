@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" role="img" aria-labelledby="title desc">
+  <title id="title">Scene placeholder</title>
+  <desc id="desc">A stylized tarot scene placeholder with a silhouette, doorway, and moonlit atmosphere.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" x2="0" y1="0" y2="1">
+      <stop offset="0%" stop-color="#2b1d4d"/>
+      <stop offset="100%" stop-color="#120d21"/>
+    </linearGradient>
+    <linearGradient id="floor" x1="0" x2="1" y1="0" y2="0">
+      <stop offset="0%" stop-color="#534074"/>
+      <stop offset="100%" stop-color="#2a1f45"/>
+    </linearGradient>
+  </defs>
+  <rect width="640" height="420" fill="url(#bg)"/>
+  <circle cx="500" cy="100" r="54" fill="#f4d884" opacity="0.75"/>
+  <path d="M80 350 L560 350 L505 260 L140 260 Z" fill="url(#floor)" opacity="0.8"/>
+  <rect x="180" y="120" width="260" height="210" rx="18" fill="#1b1430" stroke="#e8c872" stroke-width="4"/>
+  <path d="M220 160 L420 160 L420 310 L220 310 Z" fill="#1d1834" opacity="0.5"/>
+  <circle cx="305" cy="165" r="42" fill="#e8c872" opacity="0.9"/>
+  <path d="M260 235 Q305 205 350 235 L340 310 L270 310 Z" fill="#efe8ff" opacity="0.8"/>
+  <path d="M225 240 L310 280 L370 235" stroke="#ffc857" stroke-width="8" fill="none" opacity="0.9"/>
+  <path d="M75 355 C150 310, 190 306, 230 330" stroke="#e8c872" stroke-width="7" fill="none" opacity="0.7"/>
+  <path d="M390 330 C460 305, 520 310, 565 355" stroke="#e8c872" stroke-width="7" fill="none" opacity="0.7"/>
+</svg>

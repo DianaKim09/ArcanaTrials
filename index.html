@@ -72,6 +72,56 @@
     .context, .prompt { line-height: 1.55; }
     .context { color: var(--muted); text-align: center; margin: 0 0 22px; }
     .prompt { font-size: 1.15rem; margin: 0 0 16px; }
+    .scene-card {
+      display: grid;
+      gap: 12px;
+      margin: 0 0 20px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: linear-gradient(180deg, rgba(40, 28, 60, 0.95), rgba(20, 15, 31, 0.95));
+    }
+    .scene-frame {
+      position: relative;
+      overflow: hidden;
+      border: 1px solid var(--gold);
+      border-radius: 12px;
+      background: #120d21;
+    }
+    .scene-art {
+      display: block;
+      width: 100%;
+      max-height: 260px;
+      object-fit: cover;
+      background: #120d21;
+    }
+    .dialogue-bubble {
+      position: absolute;
+      left: 18px;
+      right: 18px;
+      bottom: 16px;
+      padding: 12px 14px;
+      border: 1px solid rgba(232, 200, 114, 0.8);
+      border-radius: 14px;
+      background: rgba(19, 14, 27, 0.84);
+      color: var(--text);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      line-height: 1.45;
+    }
+    .npc-label {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--gold);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+    .scene-caption {
+      color: var(--muted);
+      line-height: 1.5;
+      margin: 0;
+      text-align: center;
+    }
     .choices { display: grid; gap: 12px; }
     .choice { text-align: left; color: var(--text); border-color: var(--border); }
     .status { min-height: 1.5em; margin: 14px 0 0; color: #ffd3ba; text-align: center; }

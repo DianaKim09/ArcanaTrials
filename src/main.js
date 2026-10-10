@@ -16,23 +16,23 @@ const TOPIC_LABELS = {
 
 const CHOICES = [
   {
-    text: "Take one thoughtful step and stay open to what you learn.",
-    reflection: "taking one thoughtful step and staying open",
+    text: "Ask a clarifying question and listen before choosing.",
+    reflection: "asking a clarifying question and listening before choosing",
+    value: 2,
+  },
+  {
+    text: "Trust your instinct and move forward with confidence.",
+    reflection: "trusting your instinct and moving forward with confidence",
     value: 1,
   },
   {
-    text: "Rush ahead before checking what matters most to you.",
-    reflection: "rushing ahead before checking what matters",
-    value: -1,
+    text: "Pause, gather more information, and wait for the right moment.",
+    reflection: "pausing to gather more information before acting",
+    value: 0,
   },
   {
-    text: "Pause, gather perspective, and choose what fits your values.",
-    reflection: "pausing to gather perspective and act by your values",
-    value: 1,
-  },
-  {
-    text: "Avoid the difficult part and hope it resolves on its own.",
-    reflection: "avoiding the difficult part for now",
+    text: "Confront the tension directly and deal with it head-on.",
+    reflection: "confronting the tension directly and dealing with it head-on",
     value: -1,
   },
 ];
@@ -116,22 +116,48 @@ function drawNextCard() {
   showCardPopup(card, state.cards.length - 1);
 }
 
+function buildScenePrompt(card, keyword, index) {
+  const rolePrompt = {
+    0: "You are standing in a small room, barely lit by a single lamp. A stranger leans in and asks:",
+    1: "The tension sharpens. Another voice cuts through the silence and asks:",
+  };
+
+  const setting = card.keywords.length > 1
+    ? `this is about ${card.keywords.slice(0, 2).join(" and ")}`
+    : `this is about ${keyword}`;
+
+  return `${rolePrompt[index % 2]} “I need to know how you handle ${setting}. What do you do?”`;
+}
+
 function renderDecision() {
   const card = state.currentCard;
   const keyword = card.keywords[state.decisionIndex] || card.keywords[0];
-  const prompt = state.decisionIndex === 0
-    ? `A moment in ${state.topic} asks you to consider ${keyword}. How do you respond?`
-    : `As ${keyword} comes into focus, what will you do next?`;
+  const scenePrompt = buildScenePrompt(card, keyword, state.decisionIndex);
+
+  const scene = el("div", "scene-card");
+  const frame = el("div", "scene-frame");
+  const art = new Image();
+  art.className = "scene-art";
+  art.alt = `First-person scene illustration for ${card.name}`;
+  art.src = card.sceneImage || "assets/scenes/scene-placeholder.svg";
+
+  const bubble = el("div", "dialogue-bubble");
+  bubble.appendChild(el("span", "npc-label", "NPC"));
+  bubble.appendChild(el("span", null, scenePrompt));
+
+  frame.append(art, bubble);
+  scene.appendChild(frame);
+  scene.appendChild(el("p", "scene-caption", `From your point of view, the situation is about ${keyword}. The general tension is that you must act without pretending the problem is smaller than it is.`));
 
   trial.replaceChildren(
     el("h2", "trial-heading", `${card.name}'s trial`),
     el("p", "context", `A reflection on ${card.keywords.join(" and ")}. ${state.context}`.trim()),
-    el("p", "prompt", `Decision ${state.decisionIndex + 1} of 2: ${prompt}`),
+    el("p", "prompt", `Decision ${state.decisionIndex + 1} of 2: answer the NPC in front of you.`),
+    scene,
   );
 
   const choices = el("div", "choices");
-  const firstChoice = state.decisionIndex === 0 ? 0 : 2;
-  CHOICES.slice(firstChoice, firstChoice + 2).forEach((choice) => {
+  CHOICES.forEach((choice) => {
     const button = el("button", "choice", choice.text);
     button.type = "button";
     button.addEventListener("click", () => recordChoice(choice));
