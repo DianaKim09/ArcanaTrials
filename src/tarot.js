@@ -1,4 +1,4 @@
-export const POSITIONS = ["Past", "Present", "Future"];
+export const POSITIONS = ["Wands", "Swords", "Cups", "Pentacles"];
 
 export function shuffle(list) {
   const deck = [...list];
