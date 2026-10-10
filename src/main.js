@@ -1,28 +1,8 @@
-const POSITIONS = ["Past", "Present", "Future"];
-let cards = [];
+import { POSITIONS, drawCards, loadCards } from "./tarot.js";
 
-async function loadCards() {
-  const res = await fetch("data/cards.json");
-  cards = await res.json();
-}
-
-// Fisher-Yates shuffle on a copy.
-function shuffle(list) {
-  const a = [...list];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
-}
-
-// Later: weight this draw by minigame performance (see docs/DESIGN.md).
-function drawCards(n = 3) {
-  return shuffle(cards).slice(0, n).map((card) => ({
-    card,
-    reversed: Math.random() < 0.3,
-  }));
-}
+const state = {
+  deck: [],
+};
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -35,18 +15,29 @@ function renderSpread(draw) {
   const spread = document.getElementById("spread");
   spread.replaceChildren();
 
-  draw.forEach(({ card, reversed }, i) => {
+  draw.forEach((card, i) => {
+    const { name, keywords, upright, reversedMeaning } = card;
+    const isReversed = Boolean(card.reversed);
     const slot = el("div", "slot");
     slot.appendChild(el("div", "slot-label", POSITIONS[i]));
 
     const cardEl = el("div", "card");
     const inner = el("div", "inner");
 
-    const back = el("div", "face back", "\u2726");
-    const front = el("div", "face front" + (reversed ? " reversed" : ""));
-    front.appendChild(el("h3", null, card.name));
-    front.appendChild(el("p", "kw", card.keywords.join(" \u00b7 ")));
-    front.appendChild(el("p", "meaning", reversed ? card.reversed : card.upright));
+    const back = el("div", "face back", "✦");
+    const front = el("div", "face front" + (isReversed ? " reversed" : ""));
+
+    if (card.image) {
+      const art = new Image();
+      art.src = card.image;
+      art.alt = name;
+      art.className = "card-art";
+      front.appendChild(art);
+    }
+
+    front.appendChild(el("h3", null, name));
+    front.appendChild(el("p", "kw", keywords.join(" · ")));
+    front.appendChild(el("p", "meaning", isReversed ? reversedMeaning : upright));
 
     inner.append(back, front);
     cardEl.appendChild(inner);
@@ -56,11 +47,25 @@ function renderSpread(draw) {
   });
 }
 
-document.getElementById("draw").addEventListener("click", () => {
-  if (cards.length) renderSpread(drawCards());
+async function ensureDeckLoaded() {
+  if (state.deck.length) return state.deck;
+
+  state.deck = await loadCards();
+  return state.deck;
+}
+
+document.getElementById("draw").addEventListener("click", async () => {
+  try {
+    const deck = await ensureDeckLoaded();
+    renderSpread(drawCards(deck, 3));
+  } catch (error) {
+    const spread = document.getElementById("spread");
+    spread.textContent = error.message || "Could not draw the cards.";
+  }
 });
 
-loadCards().catch(() => {
-  document.getElementById("spread").textContent =
+ensureDeckLoaded().catch(() => {
+  const spread = document.getElementById("spread");
+  spread.textContent =
     "Could not load cards. Serve this folder with: python3 -m http.server 8000";
 });

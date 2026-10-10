@@ -22,6 +22,7 @@
     .face { position: absolute; inset: 0; backface-visibility: hidden; border: 2px solid var(--gold); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px; background: var(--card); }
     .back { font-size: 3rem; color: var(--gold); }
     .front { transform: rotateY(180deg); font-size: .9rem; }
+    .card-art { width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 1px solid var(--gold); margin-bottom: 10px; background: #120d21; }
     .front h3 { margin: 0 0 6px; color: var(--gold); }
     .front.reversed h3::after { content: " (reversed)"; font-size: .75rem; opacity: .8; }
     .kw { font-style: italic; opacity: .8; margin: 0 0 8px; }
@@ -37,6 +38,6 @@
   <button id="draw">Draw three cards</button>
   <div id="spread"></div>
   <div class="note">For reflection and entertainment only. Not medical, legal, or financial advice.</div>
-  <script src="src/main.js"></script>
+  <script type="module" src="src/main.js"></script>
 </body>
 </html>

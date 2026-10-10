@@ -1,0 +1,134 @@
+[
+  {
+    "name": "The Fool",
+    "keywords": ["beginnings", "trust", "opportunity"],
+    "upright": "You are stepping into a new chapter with curiosity and courage.",
+    "reversedMeaning": "A leap forward is being blocked by fear or impulsiveness."
+  },
+  {
+    "name": "The Magician",
+    "keywords": ["skill", "manifestation", "focus"],
+    "upright": "Your talents and choices can shape the outcome you want.",
+    "reversedMeaning": "Your power is scattered or being misused right now."
+  },
+  {
+    "name": "The High Priestess",
+    "keywords": ["intuition", "mystery", "inner knowing"],
+    "upright": "Trust the quiet wisdom beneath the surface.",
+    "reversedMeaning": "You may be ignoring your instincts or overthinking the answer."
+  },
+  {
+    "name": "The Empress",
+    "keywords": ["abundance", "growth", "nurture"],
+    "upright": "Create space for creativity, comfort, and fertile ideas.",
+    "reversedMeaning": "You may be neglecting care, nourishment, or self-worth."
+  },
+  {
+    "name": "The Emperor",
+    "keywords": ["structure", "authority", "boundaries"],
+    "upright": "Clear rules and a steady plan will help you move forward.",
+    "reversedMeaning": "Control or rigidity may be creating unnecessary friction."
+  },
+  {
+    "name": "The Hierophant",
+    "keywords": ["tradition", "guidance", "ritual"],
+    "upright": "Learning from established wisdom can steady your path.",
+    "reversedMeaning": "You may be resisting advice or holding onto outdated systems."
+  },
+  {
+    "name": "The Lovers",
+    "keywords": ["choice", "union", "alignment"],
+    "upright": "A meaningful decision is asking for honesty and clarity.",
+    "reversedMeaning": "Misalignment or conflict is clouding a key relationship."
+  },
+  {
+    "name": "The Chariot",
+    "keywords": ["drive", "momentum", "willpower"],
+    "upright": "Focus and determination are carrying you toward success.",
+    "reversedMeaning": "Stalled energy or lack of direction is slowing the journey."
+  },
+  {
+    "name": "Strength",
+    "keywords": ["courage", "gentleness", "resilience"],
+    "upright": "Calm confidence will win more than force alone.",
+    "reversedMeaning": "You may be trying to push through without rest or compassion."
+  },
+  {
+    "name": "The Hermit",
+    "keywords": ["reflection", "solitude", "guidance"],
+    "upright": "Take time away from noise to hear your deeper truth.",
+    "reversedMeaning": "Isolation is preventing you from seeing the bigger picture."
+  },
+  {
+    "name": "Wheel of Fortune",
+    "keywords": ["cycles", "luck", "change"],
+    "upright": "A turning point is coming and will move things unexpectedly.",
+    "reversedMeaning": "You may be resisting a change that is already underway."
+  },
+  {
+    "name": "Justice",
+    "keywords": ["truth", "balance", "accountability"],
+    "upright": "Clear decisions and honest review will bring fairness.",
+    "reversedMeaning": "A hidden truth or unfair bias needs to be confronted."
+  },
+  {
+    "name": "The Hanged Man",
+    "keywords": ["pause", "release", "perspective"],
+    "upright": "Letting go of urgency can reveal the answer you need.",
+    "reversedMeaning": "Stubbornness is keeping you stuck in a difficult pause."
+  },
+  {
+    "name": "Death",
+    "keywords": ["transformation", "ending", "renewal"],
+    "upright": "A chapter is closing so a stronger one can begin.",
+    "reversedMeaning": "An ending is being delayed or avoided instead of honored."
+  },
+  {
+    "name": "Temperance",
+    "keywords": ["balance", "healing", "patience"],
+    "upright": "Steady moderation will help everything settle into place.",
+    "reversedMeaning": "Extremes or inconsistency are making the path harder."
+  },
+  {
+    "name": "The Devil",
+    "keywords": ["attachment", "shadow", "pattern"],
+    "upright": "A habit or fear may be keeping you from freedom.",
+    "reversedMeaning": "You are beginning to break unhealthy patterns and reclaim power."
+  },
+  {
+    "name": "The Tower",
+    "keywords": ["disruption", "awakening", "truth"],
+    "upright": "A sudden shake-up can clear away what no longer fits.",
+    "reversedMeaning": "You may be bracing for change without yet accepting it."
+  },
+  {
+    "name": "The Star",
+    "keywords": ["hope", "healing", "vision"],
+    "upright": "A hopeful path is opening, even if the next step is unclear.",
+    "reversedMeaning": "You may be doubting your own ability to recover or dream boldly."
+  },
+  {
+    "name": "The Moon",
+    "keywords": ["uncertainty", "dreams", "intuition"],
+    "upright": "Not everything is clear yet; let the fog reveal what it can.",
+    "reversedMeaning": "Confusion is lifting and truth is becoming easier to see."
+  },
+  {
+    "name": "The Sun",
+    "keywords": ["joy", "clarity", "success"],
+    "upright": "Warmth, confidence, and visibility are in your favor.",
+    "reversedMeaning": "You may be dimming your own light or avoiding celebration."
+  },
+  {
+    "name": "Judgement",
+    "keywords": ["awakening", "reckoning", "purpose"],
+    "upright": "A call to act with integrity is worth answering now.",
+    "reversedMeaning": "You may be resisting an honest evaluation or a necessary reset."
+  },
+  {
+    "name": "The World",
+    "keywords": ["completion", "fulfillment", "integration"],
+    "upright": "You are arriving at a meaningful completion and new wholeness.",
+    "reversedMeaning": "A finishing cycle may be delayed until you fully integrate the lesson."
+  }
+]
