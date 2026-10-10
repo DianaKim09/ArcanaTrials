@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Arcana Trials</title>
+  <style>
+    :root { --bg: #14101f; --card: #2a1f45; --gold: #e8c872; --text: #efe8ff; }
+    * { box-sizing: border-box; }
+    body { margin: 0; min-height: 100vh; background: radial-gradient(circle at top, #2b1d4d, var(--bg)); color: var(--text); font-family: Georgia, serif; text-align: center; padding: 24px 16px; }
+    h1 { color: var(--gold); letter-spacing: 2px; margin-bottom: 4px; }
+    .sub { opacity: .75; margin-bottom: 24px; }
+    #question { width: min(480px, 90%); padding: 10px 12px; border-radius: 8px; border: 1px solid var(--gold); background: #1c1530; color: var(--text); font: inherit; }
+    button { margin-top: 12px; padding: 10px 22px; border-radius: 8px; border: 1px solid var(--gold); background: transparent; color: var(--gold); font: inherit; cursor: pointer; }
+    button:hover { background: var(--gold); color: var(--bg); }
+    #spread { display: flex; flex-wrap: wrap; gap: 20px; justify-content: center; margin: 32px 0; }
+    .slot { width: 200px; }
+    .slot-label { color: var(--gold); margin-bottom: 8px; text-transform: uppercase; font-size: .8rem; letter-spacing: 2px; }
+    .card { height: 300px; perspective: 800px; cursor: pointer; }
+    .inner { position: relative; width: 100%; height: 100%; transition: transform .7s; transform-style: preserve-3d; }
+    .card.flipped .inner { transform: rotateY(180deg); }
+    .face { position: absolute; inset: 0; backface-visibility: hidden; border: 2px solid var(--gold); border-radius: 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 14px; background: var(--card); }
+    .back { font-size: 3rem; color: var(--gold); }
+    .front { transform: rotateY(180deg); font-size: .9rem; }
+    .front h3 { margin: 0 0 6px; color: var(--gold); }
+    .front.reversed h3::after { content: " (reversed)"; font-size: .75rem; opacity: .8; }
+    .kw { font-style: italic; opacity: .8; margin: 0 0 8px; }
+    .meaning { margin: 0; line-height: 1.35; }
+    .note { margin-top: 40px; font-size: .8rem; opacity: .6; }
+  </style>
+</head>
+<body>
+  <h1>Arcana Trials</h1>
+  <div class="sub">Ask a question, draw three cards, and read what unfolds.</div>
+  <input id="question" placeholder="What is on your mind? (optional)" autocomplete="off">
+  <br>
+  <button id="draw">Draw three cards</button>
+  <div id="spread"></div>
+  <div class="note">For reflection and entertainment only. Not medical, legal, or financial advice.</div>
+  <script src="src/main.js"></script>
+</body>
+</html>
