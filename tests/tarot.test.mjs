@@ -16,6 +16,10 @@ assert.ok(deck.every((card) => (
   && card.scenario?.symbol
   && Array.isArray(card.scenario?.colors)
   && card.scenario.colors.length === 2
+  && Object.hasOwn(card, 'image')
+  && Object.hasOwn(card.scenario, 'image')
+  && (card.image === null || typeof card.image === 'string')
+  && (card.scenario.image === null || typeof card.scenario.image === 'string')
 )));
 assert.equal(new Set(deck.map((card) => card.scenario.setting)).size, deck.length);
 assert.equal(new Set(deck.map((card) => card.scenario.symbol)).size, deck.length);

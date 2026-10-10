@@ -43,9 +43,9 @@ See [docs/DESIGN.md](docs/DESIGN.md).
 
 The Rider-Waite-Smith deck (1909) is in the public domain in the US. Tarot card illustrations are not included yet; the story scenes use original, generated SVG artwork based on each card's scenario.
 
-### Use your own images
+### Change card images (developer setting)
 
-Put your PNG files in the project, then add their relative paths to `data/cards.json`:
+There is no image upload or image-changing control in the game. To change the art yourself, edit the `image` fields in each card entry in `data/cards.json`:
 
 ```json
 {
@@ -53,19 +53,19 @@ Put your PNG files in the project, then add their relative paths to `data/cards.
   "keywords": ["beginnings", "trust", "opportunity"],
   "upright": "You are stepping into a new chapter with curiosity and courage.",
   "reversedMeaning": "A leap forward is being blocked by fear or impulsiveness.",
-  "image": "assets/cards/the-fool.png",
+  "image": null,
   "scenario": {
     "setting": "A cliffside trail forks above a bright valley.",
     "character": "The traveler",
     "dialogue": "“No map, no guarantees. Would you take the first step with me?”",
     "symbol": "➶",
     "colors": ["#a94e55", "#e4a858"],
-    "image": "assets/scenes/the-fool.png"
+    "image": null
   }
 }
 ```
 
-`image` is the tarot card artwork shown in the reveal and final reading. `scenario.image` is the background shown with the character dialogue. Create the `assets/cards/` and `assets/scenes/` folders if needed, and put your PNGs there. When either image path is omitted, the app generates matching artwork from that card's scenario, symbol, and colors. Paths are relative to the project root, so serve the project as described above rather than opening `index.html` directly.
+Every card already has both fields. Set the card-level `image` to a path such as `"assets/cards/the-fool.png"` to use your tarot artwork in the reveal and reading. Set `scenario.image` to `"assets/scenes/the-fool.png"` to use your scene background behind the character dialogue. Create those folders and add the PNGs yourself. Leave either value as `null` to keep that card's built-in generated illustration. This is an author-side code/data setting; players cannot upload or change images in the game.
 
 ## License
 
