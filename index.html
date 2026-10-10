@@ -72,58 +72,74 @@
     .context, .prompt { line-height: 1.55; }
     .context { color: var(--muted); text-align: center; margin: 0 0 22px; }
     .prompt { font-size: 1.15rem; margin: 0 0 16px; }
-    .scene-card {
-      display: grid;
-      gap: 12px;
-      margin: 0 0 20px;
-      padding: 16px;
+    .story-visual {
+      position: relative;
+      margin: 16px 0;
       border: 1px solid var(--border);
       border-radius: 12px;
-      background: linear-gradient(180deg, rgba(40, 28, 60, 0.95), rgba(20, 15, 31, 0.95));
+      background: #120d21;
+      overflow: hidden;
     }
     .scene-frame {
       position: relative;
-      overflow: hidden;
-      border: 1px solid var(--gold);
-      border-radius: 12px;
-      background: #120d21;
+      min-height: 190px;
     }
-    .scene-art {
+    .story-art {
       display: block;
       width: 100%;
-      max-height: 260px;
+      aspect-ratio: 16 / 9;
       object-fit: cover;
-      background: #120d21;
     }
     .dialogue-bubble {
       position: absolute;
-      left: 18px;
-      right: 18px;
-      bottom: 16px;
-      padding: 12px 14px;
-      border: 1px solid rgba(232, 200, 114, 0.8);
-      border-radius: 14px;
-      background: rgba(19, 14, 27, 0.84);
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      left: 16px;
+      right: 16px;
+      bottom: 14px;
+      width: fit-content;
+      max-width: calc(100% - 32px);
+      padding: 11px 15px 11px 11px;
+      border: 1px solid rgb(232 200 114 / 80%);
+      border-radius: 14px 14px 14px 4px;
+      background: rgb(19 14 27 / 91%);
       color: var(--text);
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      box-shadow: 0 10px 30px rgb(0 0 0 / 35%);
+      line-height: 1.45;
+      animation: arrive .3s ease-out both;
+    }
+    .character-avatar {
+      display: grid;
+      flex: 0 0 42px;
+      width: 42px;
+      height: 42px;
+      place-items: center;
+      border: 1px solid var(--gold);
+      border-radius: 50%;
+      background: linear-gradient(145deg, #44335f, #1c1530);
+      color: var(--gold);
+      font-size: 1.5rem;
+      box-shadow: 0 0 18px rgb(232 200 114 / 20%);
+    }
+    .dialogue-copy { display: grid; gap: 3px; }
+    .dialogue-line { line-height: 1.4; }
+    .scene-caption {
+      margin: 0;
+      padding: 11px 14px 13px;
+      color: var(--muted);
+      font-size: .9rem;
       line-height: 1.45;
     }
     .npc-label {
       display: block;
-      margin-bottom: 6px;
       color: var(--gold);
       font-size: 0.75rem;
       text-transform: uppercase;
       letter-spacing: 1.5px;
     }
-    .scene-caption {
-      color: var(--muted);
-      line-height: 1.5;
-      margin: 0;
-      text-align: center;
-    }
     .choices { display: grid; gap: 12px; }
-    .choice { text-align: left; color: var(--text); border-color: var(--border); }
+    .choice { display: grid; gap: 8px; text-align: left; color: var(--text); border-color: var(--border); }
     .status { min-height: 1.5em; margin: 14px 0 0; color: #ffd3ba; text-align: center; }
     .note { margin: 32px auto 0; max-width: 620px; color: var(--muted); font-size: .85rem; line-height: 1.5; text-align: center; }
     .journey { display: grid; gap: 14px; }
@@ -136,6 +152,17 @@
     .reading-card h3 { color: var(--gold); margin: 0 0 8px; }
     .reading-card p { line-height: 1.5; margin: 8px 0 0; }
     .reading-card .keywords { color: var(--muted); font-style: italic; }
+    .tarot-art {
+      display: block;
+      width: min(180px, 55%);
+      max-height: 240px;
+      object-fit: contain;
+      margin: 14px auto;
+      border: 1px solid var(--gold);
+      border-radius: 10px;
+      background: #120d21;
+    }
+    .popup .tarot-art { width: min(155px, 45%); }
     .summary-heading { text-align: center; color: var(--gold); }
     .summary-copy { line-height: 1.6; }
     .restart { display: block; margin: 20px auto 0; }
@@ -151,16 +178,9 @@
     dialog::backdrop { background: rgb(8 5 15 / 78%); backdrop-filter: blur(4px); }
     .popup { padding: 24px; text-align: center; animation: arrive .28s ease-out both; }
     .popup-position { color: var(--gold); text-transform: uppercase; letter-spacing: 2px; font-size: .8rem; }
-    .popup-art {
-      display: block;
-      width: min(190px, 70%);
-      height: 210px;
-      object-fit: cover;
-      margin: 18px auto;
-      border: 1px solid var(--gold);
-      border-radius: 10px;
-      background: #120d21;
-    }
+    .popup .story-visual { margin: 16px 0; text-align: left; }
+    .popup .scene-frame { min-height: 0; }
+    .reading-card .story-visual { margin: 14px 0 4px; }
     .popup h2 { margin: 10px 0 6px; color: var(--gold); }
     .popup .keywords { color: var(--muted); font-style: italic; }
     .popup .meaning { line-height: 1.5; }
@@ -216,7 +236,8 @@
   <dialog id="card-modal" aria-labelledby="modal-card-name">
     <div class="popup">
       <p id="modal-position" class="popup-position"></p>
-      <img id="modal-art" class="popup-art" alt="" hidden>
+      <img id="modal-tarot-art" class="tarot-art" alt="" hidden>
+      <div id="modal-scene"></div>
       <h2 id="modal-card-name"></h2>
       <p id="modal-keywords" class="keywords"></p>
       <p id="modal-meaning" class="meaning"></p>

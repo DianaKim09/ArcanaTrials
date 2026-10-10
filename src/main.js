@@ -1,4 +1,4 @@
-import { drawWeightedCard, loadCards } from "./tarot.js";
+import { POSITIONS, drawWeightedCard, loadCards } from "./tarot.js";
 
 const READING_POSITIONS = [
   "What shaped you",
@@ -14,26 +14,30 @@ const TOPIC_LABELS = {
   change: "a change you're considering",
 };
 
-const CHOICES = [
+const SCENE_CHOICES = [
   {
-    text: "Ask a clarifying question and listen before choosing.",
-    reflection: "asking a clarifying question and listening before choosing",
-    value: 2,
+    suit: "Wands",
+    text: "Take a bold first step and invite others to join you.",
+    reflection: "taking a bold first step and inviting others to join",
+    reaction: () => "Your bold move shifts the mood. They find the courage to follow your lead.",
   },
   {
-    text: "Trust your instinct and move forward with confidence.",
-    reflection: "trusting your instinct and moving forward with confidence",
-    value: 1,
+    suit: "Swords",
+    text: "Ask a direct question and look for the clearest facts.",
+    reflection: "asking a direct question and looking for clear facts",
+    reaction: () => "They consider your questions and help separate what is known from what is feared.",
   },
   {
-    text: "Pause, gather more information, and wait for the right moment.",
-    reflection: "pausing to gather more information before acting",
-    value: 0,
+    suit: "Cups",
+    text: "Listen to those affected and respond with compassion.",
+    reflection: "listening to those affected and responding with compassion",
+    reaction: () => "They feel heard and begin to share what they truly need.",
   },
   {
-    text: "Confront the tension directly and deal with it head-on.",
-    reflection: "confronting the tension directly and dealing with it head-on",
-    value: -1,
+    suit: "Pentacles",
+    text: "Make a practical plan and work through it one step at a time.",
+    reflection: "making a practical plan and taking steady steps",
+    reaction: () => "They help turn your careful plan into something real and dependable.",
   },
 ];
 
@@ -41,12 +45,10 @@ const state = {
   deck: [],
   topic: "",
   context: "",
-  score: 0,
+  suitScores: Object.fromEntries(POSITIONS.map((suit) => [suit, 0])),
   cards: [],
   choices: [],
   currentCard: null,
-  currentCardChoices: [],
-  decisionIndex: 0,
 };
 
 const startPanel = document.getElementById("start-panel");
@@ -70,15 +72,106 @@ function selectedMeaning(card) {
   return card.reversed ? card.reversedMeaning : card.upright;
 }
 
+function sceneArtwork(scene) {
+  const [start, end] = scene.colors;
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 400">
+      <defs>
+        <linearGradient id="sky" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="${start}"/>
+          <stop offset="1" stop-color="${end}"/>
+        </linearGradient>
+        <radialGradient id="glow">
+          <stop stop-color="#fff4cb" stop-opacity=".78"/>
+          <stop offset="1" stop-color="#fff4cb" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="720" height="400" fill="url(#sky)"/>
+      <circle cx="530" cy="105" r="115" fill="url(#glow)"/>
+      <path d="M0 300 Q150 205 305 290 T720 265 V400 H0Z" fill="#17152c" fill-opacity=".48"/>
+      <path d="M0 345 Q170 260 350 335 T720 310 V400 H0Z" fill="#17152c" fill-opacity=".7"/>
+      <path d="M105 345 Q185 295 264 345" fill="none" stroke="#fff0bd" stroke-opacity=".45" stroke-width="3"/>
+      <circle cx="360" cy="167" r="83" fill="#17152c" fill-opacity=".24" stroke="#fff0bd" stroke-opacity=".72" stroke-width="2"/>
+      <text x="360" y="198" text-anchor="middle" font-size="94" fill="#fff4cb" font-family="Georgia,serif">${scene.symbol}</text>
+      <path d="M330 400 Q340 310 360 285 Q380 310 390 400" fill="#17152c" fill-opacity=".8"/>
+      <circle cx="360" cy="281" r="22" fill="#17152c" fill-opacity=".84"/>
+      <path d="M0 390 H720" stroke="#fff0bd" stroke-opacity=".25" stroke-width="2"/>
+    </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+function cardArtwork(card) {
+  const [start, end] = card.scenario.colors;
+  const title = card.name.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
+  const svg = `
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 540">
+      <defs>
+        <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="${start}"/>
+          <stop offset="1" stop-color="${end}"/>
+        </linearGradient>
+        <radialGradient id="light">
+          <stop stop-color="#fff4cb" stop-opacity=".65"/>
+          <stop offset="1" stop-color="#fff4cb" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <rect width="360" height="540" rx="22" fill="#171326"/>
+      <rect x="12" y="12" width="336" height="516" rx="18" fill="url(#card)"/>
+      <circle cx="180" cy="230" r="154" fill="url(#light)"/>
+      <rect x="27" y="27" width="306" height="486" rx="14" fill="none" stroke="#fff0bd" stroke-opacity=".78" stroke-width="2"/>
+      <path d="M52 347 Q112 278 180 326 T308 311 V469 H52Z" fill="#17152c" fill-opacity=".44"/>
+      <path d="M52 388 Q124 329 184 373 T308 358 V469 H52Z" fill="#17152c" fill-opacity=".6"/>
+      <circle cx="180" cy="222" r="91" fill="#17152c" fill-opacity=".18" stroke="#fff0bd" stroke-opacity=".8" stroke-width="2"/>
+      <text x="180" y="255" text-anchor="middle" font-size="104" fill="#fff4cb" font-family="Georgia,serif">${card.scenario.symbol}</text>
+      <path d="M154 469 Q161 396 180 380 Q199 396 206 469Z" fill="#17152c" fill-opacity=".76"/>
+      <circle cx="180" cy="374" r="19" fill="#17152c" fill-opacity=".8"/>
+      <path d="M68 489 H292" stroke="#fff0bd" stroke-opacity=".65"/>
+      <text x="180" y="496" text-anchor="middle" font-size="16" letter-spacing="2" fill="#fff4cb" font-family="Georgia,serif">${title}</text>
+    </svg>`;
+  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
+}
+
+function setImageSource(image, source, alt) {
+  image.alt = alt;
+  image.onerror = () => {
+    status.textContent = `Could not load image "${source}". Check that the path in cards.json is correct.`;
+  };
+  image.src = source;
+}
+
+function storyVisual(card, dialogue = card.scenario.dialogue) {
+  const scene = card.scenario;
+  const figure = el("figure", "story-visual");
+  const art = el("img", "story-art");
+  setImageSource(art, scene.image || sceneArtwork(scene), `${card.name}: ${scene.setting}`);
+  art.width = 720;
+  art.height = 400;
+
+  const frame = el("div", "scene-frame");
+  const bubble = el("div", "dialogue-bubble");
+  bubble.setAttribute("aria-label", `${scene.character} says: ${dialogue}`);
+  const copy = el("span", "dialogue-copy");
+  copy.append(
+    el("span", "npc-label", scene.character),
+    el("span", "dialogue-line", dialogue),
+  );
+  bubble.append(el("span", "character-avatar", scene.symbol), copy);
+  frame.append(art, bubble);
+
+  figure.append(
+    frame,
+    el("figcaption", "scene-caption", scene.setting),
+  );
+  return figure;
+}
+
 function resetReading() {
   state.topic = "";
   state.context = "";
-  state.score = 0;
+  state.suitScores = Object.fromEntries(POSITIONS.map((suit) => [suit, 0]));
   state.cards = [];
   state.choices = [];
   state.currentCard = null;
-  state.currentCardChoices = [];
-  state.decisionIndex = 0;
   startPanel.hidden = false;
   readingPanel.hidden = true;
   trial.replaceChildren();
@@ -90,8 +183,6 @@ function resetReading() {
 
 function showCardPopup(card, index) {
   state.currentCard = card;
-  state.currentCardChoices = [];
-  state.decisionIndex = 0;
 
   document.getElementById("modal-position").textContent =
     `Card ${index + 1} of 3 · ${READING_POSITIONS[index]}`;
@@ -99,101 +190,59 @@ function showCardPopup(card, index) {
     `${card.name}${card.reversed ? " (reversed)" : ""}`;
   document.getElementById("modal-keywords").textContent = card.keywords.join(" · ");
   document.getElementById("modal-meaning").textContent = selectedMeaning(card);
-
-  const art = document.getElementById("modal-art");
-  art.hidden = !card.image;
-  art.removeAttribute("src");
-  art.alt = card.image ? `Illustration of ${card.name}` : "";
-  if (card.image) art.src = card.image;
+  const tarotArt = document.getElementById("modal-tarot-art");
+  tarotArt.hidden = false;
+  tarotArt.removeAttribute("src");
+  setImageSource(tarotArt, card.image || cardArtwork(card), `Illustration of ${card.name}`);
+  const modalScene = document.getElementById("modal-scene");
+  modalScene.replaceChildren(storyVisual(card));
 
   if (!modal.open) modal.showModal();
 }
 
 function drawNextCard() {
   const usedNames = state.cards.map((card) => card.name);
-  const card = drawWeightedCard(state.deck, usedNames, state.score);
+  const card = drawWeightedCard(state.deck, usedNames, 0, state.suitScores);
   state.cards.push(card);
   showCardPopup(card, state.cards.length - 1);
 }
 
-function buildScenePrompt(card, keyword, index) {
-  const rolePrompt = {
-    0: "You are standing in a small room, barely lit by a single lamp. A stranger leans in and asks:",
-    1: "The tension sharpens. Another voice cuts through the silence and asks:",
-  };
-
-  const setting = card.keywords.length > 1
-    ? `this is about ${card.keywords.slice(0, 2).join(" and ")}`
-    : `this is about ${keyword}`;
-
-  return `${rolePrompt[index % 2]} “I need to know how you handle ${setting}. What do you do?”`;
-}
-
 function renderDecision() {
   const card = state.currentCard;
-  const keyword = card.keywords[state.decisionIndex] || card.keywords[0];
-  const scenePrompt = buildScenePrompt(card, keyword, state.decisionIndex);
-
-  const scene = el("div", "scene-card");
-  const frame = el("div", "scene-frame");
-  const art = new Image();
-  art.className = "scene-art";
-  art.alt = `First-person scene illustration for ${card.name}`;
-  art.src = card.sceneImage || "assets/scenes/scene-placeholder.svg";
-
-  const bubble = el("div", "dialogue-bubble");
-  bubble.appendChild(el("span", "npc-label", "NPC"));
-  bubble.appendChild(el("span", null, scenePrompt));
-
-  frame.append(art, bubble);
-  scene.appendChild(frame);
-  scene.appendChild(el("p", "scene-caption", `From your point of view, the situation is about ${keyword}. The general tension is that you must act without pretending the problem is smaller than it is.`));
+  const choices = SCENE_CHOICES.map((choice) => ({
+    ...choice,
+    reaction: choice.reaction(),
+  }));
 
   trial.replaceChildren(
-    el("h2", "trial-heading", `${card.name}'s trial`),
-    el("p", "context", `A reflection on ${card.keywords.join(" and ")}. ${state.context}`.trim()),
-    el("p", "prompt", `Decision ${state.decisionIndex + 1} of 2: answer the NPC in front of you.`),
-    scene,
+    el("h2", "trial-heading", `You are there · ${card.name}'s trial`),
+    el("p", "prompt", `You are making a choice about ${state.topic}. What do you do?`),
+    storyVisual(card),
   );
 
-  const choices = el("div", "choices");
-  CHOICES.forEach((choice) => {
+  const choiceList = el("div", "choices");
+  choices.forEach((choice) => {
     const button = el("button", "choice", choice.text);
     button.type = "button";
     button.addEventListener("click", () => recordChoice(choice));
-    choices.appendChild(button);
+    choiceList.appendChild(button);
   });
-  trial.appendChild(choices);
+  trial.appendChild(choiceList);
 }
 
 function recordChoice(choice) {
-  state.score += choice.value;
-  state.currentCardChoices.push(choice);
+  state.suitScores[choice.suit] += 1;
   state.choices.push({
     card: state.currentCard.name,
-    decision: state.decisionIndex + 1,
+    event: state.cards.length,
+    suit: choice.suit,
     reflection: choice.reflection,
+    reaction: choice.reaction,
   });
-  state.decisionIndex += 1;
 
-  if (state.decisionIndex < 2) {
-    renderDecision();
-    return;
-  }
-
-  renderTrialComplete();
-}
-
-function renderTrialComplete() {
-  const card = state.currentCard;
-  const reflections = state.currentCardChoices.map((choice) => choice.reflection);
   trial.replaceChildren(
-    el("h2", "trial-heading", "Trial complete"),
-    el(
-      "p",
-      "context",
-      `For ${card.name}, you chose ${reflections[0]}, then ${reflections[1]}. Keep those responses in mind as the reading unfolds.`,
-    ),
+    el("h2", "trial-heading", "Their response"),
+    storyVisual(state.currentCard, choice.reaction),
   );
 
   const next = el("button", "primary", state.cards.length === 3 ? "See your full reading" : "Draw the next card");
@@ -229,24 +278,26 @@ function renderSummary() {
         null,
         `${READING_POSITIONS[index]} · ${card.name}${card.reversed ? " (reversed)" : ""}`,
       ),
+    );
+    const art = el("img", "tarot-art");
+    setImageSource(art, card.image || cardArtwork(card), `Illustration of ${card.name}`);
+    article.appendChild(art);
+    article.append(
       el("p", "keywords", card.keywords.join(" · ")),
+      storyVisual(
+        card,
+        state.choices.find((choice) => choice.card === card.name)?.reaction || card.scenario.dialogue,
+      ),
       el("p", null, selectedMeaning(card)),
     );
 
     const cardChoices = state.choices.filter((choice) => choice.card === card.name);
     const response = cardChoices
-      .map((choice) => `Decision ${choice.decision}: ${choice.reflection}`)
+      .map((choice) => choice.reflection)
       .join("; ");
-    article.appendChild(el("p", null, `In this trial, you experienced ${response}.`));
+    article.appendChild(el("p", null, `You chose ${response}.`));
     summary.appendChild(article);
   });
-
-  const synthesis = state.score > 1
-    ? "Across the trials, you often leaned toward thoughtful action and staying open to new information."
-    : state.score < -1
-      ? "Across the trials, familiar or avoidant responses appeared more often; notice what feels ready to change, without judging yourself."
-      : "Across the trials, you moved between careful reflection and decisive action, suggesting there may be more than one useful way forward.";
-  summary.appendChild(el("p", "summary-copy", synthesis));
 
   const restart = el("button", "restart", "Start a new reading");
   restart.type = "button";
@@ -272,7 +323,7 @@ form.addEventListener("submit", async (event) => {
     if (!state.deck.length) state.deck = await loadCards();
     state.topic = TOPIC_LABELS[document.getElementById("topic").value];
     state.context = document.getElementById("context").value.trim();
-    state.score = 0;
+    state.suitScores = Object.fromEntries(POSITIONS.map((suit) => [suit, 0]));
     state.cards = [];
     state.choices = [];
     startPanel.hidden = true;

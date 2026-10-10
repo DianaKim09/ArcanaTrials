@@ -3,132 +3,286 @@
     "name": "The Fool",
     "keywords": ["beginnings", "trust", "opportunity"],
     "upright": "You are stepping into a new chapter with curiosity and courage.",
-    "reversedMeaning": "A leap forward is being blocked by fear or impulsiveness."
+    "reversedMeaning": "A leap forward is being blocked by fear or impulsiveness.",
+    "scenario": {
+      "setting": "A cliffside trail forks above a bright valley. A traveler with a worn pack waits beside the first step.",
+      "character": "The traveler",
+      "dialogue": "“No map, no guarantees. Would you take the first step with me?”",
+      "symbol": "➶",
+      "colors": ["#a94e55", "#e4a858"]
+    }
   },
   {
     "name": "The Magician",
     "keywords": ["skill", "manifestation", "focus"],
     "upright": "Your talents and choices can shape the outcome you want.",
-    "reversedMeaning": "Your power is scattered or being misused right now."
+    "reversedMeaning": "Your power is scattered or being misused right now.",
+    "scenario": {
+      "setting": "In a candlelit workshop, a young apprentice faces a table of tools and a device that will not turn on.",
+      "character": "The apprentice",
+      "dialogue": "“I have everything I need, I think. Can you help me find the missing piece?”",
+      "symbol": "✧",
+      "colors": ["#694d9b", "#d39d59"]
+    }
   },
   {
     "name": "The High Priestess",
     "keywords": ["intuition", "mystery", "inner knowing"],
     "upright": "Trust the quiet wisdom beneath the surface.",
-    "reversedMeaning": "You may be ignoring your instincts or overthinking the answer."
+    "reversedMeaning": "You may be ignoring your instincts or overthinking the answer.",
+    "scenario": {
+      "setting": "A moonlit archive is silent except for a sealed letter on the keeper's desk.",
+      "character": "The archive keeper",
+      "dialogue": "“The answer is here, but the letter was not meant for me. What do you sense?”",
+      "symbol": "☾",
+      "colors": ["#29385f", "#8c79ad"]
+    }
   },
   {
     "name": "The Empress",
     "keywords": ["abundance", "growth", "nurture"],
     "upright": "Create space for creativity, comfort, and fertile ideas.",
-    "reversedMeaning": "You may be neglecting care, nourishment, or self-worth."
+    "reversedMeaning": "You may be neglecting care, nourishment, or self-worth.",
+    "scenario": {
+      "setting": "Warm rain taps the greenhouse roof while a gardener kneels beside a row of wilting seedlings.",
+      "character": "The gardener",
+      "dialogue": "“They need more than water. What would help this little patch thrive?”",
+      "symbol": "❋",
+      "colors": ["#38644c", "#c5a45a"]
+    }
   },
   {
     "name": "The Emperor",
     "keywords": ["structure", "authority", "boundaries"],
     "upright": "Clear rules and a steady plan will help you move forward.",
-    "reversedMeaning": "Control or rigidity may be creating unnecessary friction."
+    "reversedMeaning": "Control or rigidity may be creating unnecessary friction.",
+    "scenario": {
+      "setting": "At the city gate, a storm-damaged wall leaves one narrow passage for a line of waiting families.",
+      "character": "The gate captain",
+      "dialogue": "“People need order, but these rules are slowing everyone down. What is fair?”",
+      "symbol": "♜",
+      "colors": ["#53647b", "#b2784e"]
+    }
   },
   {
     "name": "The Hierophant",
     "keywords": ["tradition", "guidance", "ritual"],
     "upright": "Learning from established wisdom can steady your path.",
-    "reversedMeaning": "You may be resisting advice or holding onto outdated systems."
+    "reversedMeaning": "You may be resisting advice or holding onto outdated systems.",
+    "scenario": {
+      "setting": "In an old hillside shrine, an acolyte prepares a ceremony whose meaning has been forgotten by the village.",
+      "character": "The acolyte",
+      "dialogue": "“We have always done it this way. Should we keep the custom or ask why it began?”",
+      "symbol": "♧",
+      "colors": ["#65517f", "#c09a64"]
+    }
   },
   {
     "name": "The Lovers",
     "keywords": ["choice", "union", "alignment"],
     "upright": "A meaningful decision is asking for honesty and clarity.",
-    "reversedMeaning": "Misalignment or conflict is clouding a key relationship."
+    "reversedMeaning": "Misalignment or conflict is clouding a key relationship.",
+    "scenario": {
+      "setting": "Two siblings stand on either side of their late parent's little bookshop, each holding a different key.",
+      "character": "The siblings",
+      "dialogue": "“We both love this place, but want different futures for it. Will you hear us out?”",
+      "symbol": "♡",
+      "colors": ["#824d70", "#d7a06f"]
+    }
   },
   {
     "name": "The Chariot",
     "keywords": ["drive", "momentum", "willpower"],
     "upright": "Focus and determination are carrying you toward success.",
-    "reversedMeaning": "Stalled energy or lack of direction is slowing the journey."
+    "reversedMeaning": "Stalled energy or lack of direction is slowing the journey.",
+    "scenario": {
+      "setting": "At a rain-slick crossroads, a courier's overloaded cart points toward two urgent deliveries.",
+      "character": "The courier",
+      "dialogue": "“I can only get one there in time. Which way should I steer?”",
+      "symbol": "➤",
+      "colors": ["#4b6186", "#c6864e"]
+    }
   },
   {
     "name": "Strength",
     "keywords": ["courage", "gentleness", "resilience"],
     "upright": "Calm confidence will win more than force alone.",
-    "reversedMeaning": "You may be trying to push through without rest or compassion."
+    "reversedMeaning": "You may be trying to push through without rest or compassion.",
+    "scenario": {
+      "setting": "A frightened horse trembles in a stable as thunder rolls outside. Its caretaker keeps a careful distance.",
+      "character": "The caretaker",
+      "dialogue": "“It will not come close. Can you help me make it feel safe?”",
+      "symbol": "♌",
+      "colors": ["#765240", "#c99c6b"]
+    }
   },
   {
     "name": "The Hermit",
     "keywords": ["reflection", "solitude", "guidance"],
     "upright": "Take time away from noise to hear your deeper truth.",
-    "reversedMeaning": "Isolation is preventing you from seeing the bigger picture."
+    "reversedMeaning": "Isolation is preventing you from seeing the bigger picture.",
+    "scenario": {
+      "setting": "High in the mountains, a lighthouse keeper tends a beacon that has gone dark on a foggy night.",
+      "character": "The keeper",
+      "dialogue": "“I have worked alone for years. Tonight, I could use another pair of hands.”",
+      "symbol": "♙",
+      "colors": ["#40556a", "#b3a173"]
+    }
   },
   {
     "name": "Wheel of Fortune",
     "keywords": ["cycles", "luck", "change"],
     "upright": "A turning point is coming and will move things unexpectedly.",
-    "reversedMeaning": "You may be resisting a change that is already underway."
+    "reversedMeaning": "You may be resisting a change that is already underway.",
+    "scenario": {
+      "setting": "At the market, a broken prize wheel spins in the wind while vendors wait to hear whether the fair can continue.",
+      "character": "The fair organizer",
+      "dialogue": "“The old plan has fallen apart. Do we repair it or try something new?”",
+      "symbol": "◉",
+      "colors": ["#76603e", "#bd7356"]
+    }
   },
   {
     "name": "Justice",
     "keywords": ["truth", "balance", "accountability"],
     "upright": "Clear decisions and honest review will bring fairness.",
-    "reversedMeaning": "A hidden truth or unfair bias needs to be confronted."
+    "reversedMeaning": "A hidden truth or unfair bias needs to be confronted.",
+    "scenario": {
+      "setting": "Two witnesses disagree in a quiet town hall, and a judge pauses before delivering a verdict.",
+      "character": "The judge",
+      "dialogue": "“Both stories sound certain. What should I ask before I decide?”",
+      "symbol": "⚖",
+      "colors": ["#425274", "#c1a35c"]
+    }
   },
   {
     "name": "The Hanged Man",
     "keywords": ["pause", "release", "perspective"],
     "upright": "Letting go of urgency can reveal the answer you need.",
-    "reversedMeaning": "Stubbornness is keeping you stuck in a difficult pause."
+    "reversedMeaning": "Stubbornness is keeping you stuck in a difficult pause.",
+    "scenario": {
+      "setting": "A flooded orchard has trapped a farmer in the upper branches of an old tree.",
+      "character": "The farmer",
+      "dialogue": "“I can wait for the water to drop, or risk climbing down. What do you see?”",
+      "symbol": "⟲",
+      "colors": ["#4d694e", "#7e9db4"]
+    }
   },
   {
     "name": "Death",
     "keywords": ["transformation", "ending", "renewal"],
     "upright": "A chapter is closing so a stronger one can begin.",
-    "reversedMeaning": "An ending is being delayed or avoided instead of honored."
+    "reversedMeaning": "An ending is being delayed or avoided instead of honored.",
+    "scenario": {
+      "setting": "The last curtain falls in a small theater scheduled to close, and the stagehand gathers the final props.",
+      "character": "The stagehand",
+      "dialogue": "“The show is over. Which part should we carry with us into whatever comes next?”",
+      "symbol": "✥",
+      "colors": ["#604963", "#b87863"]
+    }
   },
   {
     "name": "Temperance",
     "keywords": ["balance", "healing", "patience"],
     "upright": "Steady moderation will help everything settle into place.",
-    "reversedMeaning": "Extremes or inconsistency are making the path harder."
+    "reversedMeaning": "Extremes or inconsistency are making the path harder.",
+    "scenario": {
+      "setting": "In an apothecary, two jars of ingredients sit open beside a healer trying to mix a soothing remedy.",
+      "character": "The healer",
+      "dialogue": "“Too much of either will make it worse. How should I find the right measure?”",
+      "symbol": "⚗",
+      "colors": ["#55746d", "#b59b60"]
+    }
   },
   {
     "name": "The Devil",
     "keywords": ["attachment", "shadow", "pattern"],
     "upright": "A habit or fear may be keeping you from freedom.",
-    "reversedMeaning": "You are beginning to break unhealthy patterns and reclaim power."
+    "reversedMeaning": "You are beginning to break unhealthy patterns and reclaim power.",
+    "scenario": {
+      "setting": "Deep in a mine, a foreman finds a ledger showing that workers are bound by a debt they cannot repay.",
+      "character": "The foreman",
+      "dialogue": "“This bargain keeps everyone trapped. What would it take to break the pattern?”",
+      "symbol": "⛓",
+      "colors": ["#473a50", "#a55e48"]
+    }
   },
   {
     "name": "The Tower",
     "keywords": ["disruption", "awakening", "truth"],
     "upright": "A sudden shake-up can clear away what no longer fits.",
-    "reversedMeaning": "You may be bracing for change without yet accepting it."
+    "reversedMeaning": "You may be bracing for change without yet accepting it.",
+    "scenario": {
+      "setting": "After a lightning strike cracks the old bell tower, a mason points to a safer path through the square.",
+      "character": "The mason",
+      "dialogue": "“The old tower will not stand. How do we get everyone clear and begin again?”",
+      "symbol": "ϟ",
+      "colors": ["#46506d", "#c2674d"]
+    }
   },
   {
     "name": "The Star",
     "keywords": ["hope", "healing", "vision"],
     "upright": "A hopeful path is opening, even if the next step is unclear.",
-    "reversedMeaning": "You may be doubting your own ability to recover or dream boldly."
+    "reversedMeaning": "You may be doubting your own ability to recover or dream boldly.",
+    "scenario": {
+      "setting": "On the roof of an observatory, a young astronomer searches the clearing sky for one familiar star.",
+      "character": "The astronomer",
+      "dialogue": "“The clouds are finally lifting. Which direction should we look first?”",
+      "symbol": "✦",
+      "colors": ["#334b70", "#7d91b7"]
+    }
   },
   {
     "name": "The Moon",
     "keywords": ["uncertainty", "dreams", "intuition"],
     "upright": "Not everything is clear yet; let the fog reveal what it can.",
-    "reversedMeaning": "Confusion is lifting and truth is becoming easier to see."
+    "reversedMeaning": "Confusion is lifting and truth is becoming easier to see.",
+    "scenario": {
+      "setting": "Fog closes around a marsh ferry as its keeper hears an uncertain bell from somewhere across the water.",
+      "character": "The ferry keeper",
+      "dialogue": "“I cannot see the shore. Do we wait for the fog to pass, or trust the sound?”",
+      "symbol": "☽",
+      "colors": ["#39455f", "#8586a7"]
+    }
   },
   {
     "name": "The Sun",
     "keywords": ["joy", "clarity", "success"],
     "upright": "Warmth, confidence, and visibility are in your favor.",
-    "reversedMeaning": "You may be dimming your own light or avoiding celebration."
+    "reversedMeaning": "You may be dimming your own light or avoiding celebration.",
+    "scenario": {
+      "setting": "A village festival fills the sunlit square while a baker brings out the first loaf from a new oven.",
+      "character": "The baker",
+      "dialogue": "“The whole town helped build this. Who should we invite to share the first slice?”",
+      "symbol": "☼",
+      "colors": ["#b77343", "#edcc70"]
+    }
   },
   {
     "name": "Judgement",
     "keywords": ["awakening", "reckoning", "purpose"],
     "upright": "A call to act with integrity is worth answering now.",
-    "reversedMeaning": "You may be resisting an honest evaluation or a necessary reset."
+    "reversedMeaning": "You may be resisting an honest evaluation or a necessary reset.",
+    "scenario": {
+      "setting": "A messenger returns to the town square with news that may change a decision everyone thought was final.",
+      "character": "The messenger",
+      "dialogue": "“There is still time to answer the call. Are we ready to hear what has changed?”",
+      "symbol": "♬",
+      "colors": ["#68516d", "#d6ad68"]
+    }
   },
   {
     "name": "The World",
     "keywords": ["completion", "fulfillment", "integration"],
     "upright": "You are arriving at a meaningful completion and new wholeness.",
-    "reversedMeaning": "A finishing cycle may be delayed until you fully integrate the lesson."
+    "reversedMeaning": "A finishing cycle may be delayed until you fully integrate the lesson.",
+    "scenario": {
+      "setting": "At the harbor's edge, a mapmaker lays out a chart joining routes from every place you have visited.",
+      "character": "The mapmaker",
+      "dialogue": "“The journey brought us all here. Where should the next map begin?”",
+      "symbol": "◎",
+      "colors": ["#3d6b70", "#d1aa65"]
+    }
   }
 ]
