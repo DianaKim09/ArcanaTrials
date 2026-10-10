@@ -1,8 +1,63 @@
-import { POSITIONS, drawCards, loadCards } from "./tarot.js";
+import { drawWeightedCard, loadCards } from "./tarot.js";
+
+const READING_POSITIONS = [
+  "What shaped you",
+  "What you're facing",
+  "Where your choices lead",
+];
+
+const TOPIC_LABELS = {
+  career: "your career",
+  future: "your future",
+  love: "your love life",
+  growth: "your personal growth",
+  change: "a change you're considering",
+};
+
+const CHOICES = [
+  {
+    text: "Take one thoughtful step and stay open to what you learn.",
+    reflection: "taking one thoughtful step and staying open",
+    value: 1,
+  },
+  {
+    text: "Rush ahead before checking what matters most to you.",
+    reflection: "rushing ahead before checking what matters",
+    value: -1,
+  },
+  {
+    text: "Pause, gather perspective, and choose what fits your values.",
+    reflection: "pausing to gather perspective and act by your values",
+    value: 1,
+  },
+  {
+    text: "Avoid the difficult part and hope it resolves on its own.",
+    reflection: "avoiding the difficult part for now",
+    value: -1,
+  },
+];
 
 const state = {
   deck: [],
+  topic: "",
+  context: "",
+  score: 0,
+  cards: [],
+  choices: [],
+  currentCard: null,
+  currentCardChoices: [],
+  decisionIndex: 0,
 };
+
+const startPanel = document.getElementById("start-panel");
+const readingPanel = document.getElementById("reading-panel");
+const progress = document.getElementById("progress");
+const trial = document.getElementById("trial");
+const summary = document.getElementById("summary");
+const status = document.getElementById("status");
+const form = document.getElementById("reading-form");
+const startButton = document.getElementById("start-reading");
+const modal = document.getElementById("card-modal");
 
 function el(tag, className, text) {
   const node = document.createElement(tag);
@@ -11,61 +66,199 @@ function el(tag, className, text) {
   return node;
 }
 
-function renderSpread(draw) {
-  const spread = document.getElementById("spread");
-  spread.replaceChildren();
+function selectedMeaning(card) {
+  return card.reversed ? card.reversedMeaning : card.upright;
+}
 
-  draw.forEach((card, i) => {
-    const { name, keywords, upright, reversedMeaning } = card;
-    const isReversed = Boolean(card.reversed);
-    const slot = el("div", "slot");
-    slot.appendChild(el("div", "slot-label", POSITIONS[i]));
+function resetReading() {
+  state.topic = "";
+  state.context = "";
+  state.score = 0;
+  state.cards = [];
+  state.choices = [];
+  state.currentCard = null;
+  state.currentCardChoices = [];
+  state.decisionIndex = 0;
+  startPanel.hidden = false;
+  readingPanel.hidden = true;
+  trial.replaceChildren();
+  summary.replaceChildren();
+  summary.hidden = true;
+  progress.textContent = "";
+  status.textContent = "";
+}
 
-    const cardEl = el("div", "card");
-    const inner = el("div", "inner");
+function showCardPopup(card, index) {
+  state.currentCard = card;
+  state.currentCardChoices = [];
+  state.decisionIndex = 0;
 
-    const back = el("div", "face back", "✦");
-    const front = el("div", "face front" + (isReversed ? " reversed" : ""));
+  document.getElementById("modal-position").textContent =
+    `Card ${index + 1} of 3 · ${READING_POSITIONS[index]}`;
+  document.getElementById("modal-card-name").textContent =
+    `${card.name}${card.reversed ? " (reversed)" : ""}`;
+  document.getElementById("modal-keywords").textContent = card.keywords.join(" · ");
+  document.getElementById("modal-meaning").textContent = selectedMeaning(card);
 
-    if (card.image) {
-      const art = new Image();
-      art.src = card.image;
-      art.alt = name;
-      art.className = "card-art";
-      front.appendChild(art);
-    }
+  const art = document.getElementById("modal-art");
+  art.hidden = !card.image;
+  art.removeAttribute("src");
+  art.alt = card.image ? `Illustration of ${card.name}` : "";
+  if (card.image) art.src = card.image;
 
-    front.appendChild(el("h3", null, name));
-    front.appendChild(el("p", "kw", keywords.join(" · ")));
-    front.appendChild(el("p", "meaning", isReversed ? reversedMeaning : upright));
+  if (!modal.open) modal.showModal();
+}
 
-    inner.append(back, front);
-    cardEl.appendChild(inner);
-    cardEl.addEventListener("click", () => cardEl.classList.toggle("flipped"));
-    slot.appendChild(cardEl);
-    spread.appendChild(slot);
+function drawNextCard() {
+  const usedNames = state.cards.map((card) => card.name);
+  const card = drawWeightedCard(state.deck, usedNames, state.score);
+  state.cards.push(card);
+  showCardPopup(card, state.cards.length - 1);
+}
+
+function renderDecision() {
+  const card = state.currentCard;
+  const keyword = card.keywords[state.decisionIndex] || card.keywords[0];
+  const prompt = state.decisionIndex === 0
+    ? `A moment in ${state.topic} asks you to consider ${keyword}. How do you respond?`
+    : `As ${keyword} comes into focus, what will you do next?`;
+
+  trial.replaceChildren(
+    el("h2", "trial-heading", `${card.name}'s trial`),
+    el("p", "context", `A reflection on ${card.keywords.join(" and ")}. ${state.context}`.trim()),
+    el("p", "prompt", `Decision ${state.decisionIndex + 1} of 2: ${prompt}`),
+  );
+
+  const choices = el("div", "choices");
+  const firstChoice = state.decisionIndex === 0 ? 0 : 2;
+  CHOICES.slice(firstChoice, firstChoice + 2).forEach((choice) => {
+    const button = el("button", "choice", choice.text);
+    button.type = "button";
+    button.addEventListener("click", () => recordChoice(choice));
+    choices.appendChild(button);
   });
+  trial.appendChild(choices);
 }
 
-async function ensureDeckLoaded() {
-  if (state.deck.length) return state.deck;
+function recordChoice(choice) {
+  state.score += choice.value;
+  state.currentCardChoices.push(choice);
+  state.choices.push({
+    card: state.currentCard.name,
+    decision: state.decisionIndex + 1,
+    reflection: choice.reflection,
+  });
+  state.decisionIndex += 1;
 
-  state.deck = await loadCards();
-  return state.deck;
-}
-
-document.getElementById("draw").addEventListener("click", async () => {
-  try {
-    const deck = await ensureDeckLoaded();
-    renderSpread(drawCards(deck, 3));
-  } catch (error) {
-    const spread = document.getElementById("spread");
-    spread.textContent = error.message || "Could not draw the cards.";
+  if (state.decisionIndex < 2) {
+    renderDecision();
+    return;
   }
+
+  renderTrialComplete();
+}
+
+function renderTrialComplete() {
+  const card = state.currentCard;
+  const reflections = state.currentCardChoices.map((choice) => choice.reflection);
+  trial.replaceChildren(
+    el("h2", "trial-heading", "Trial complete"),
+    el(
+      "p",
+      "context",
+      `For ${card.name}, you chose ${reflections[0]}, then ${reflections[1]}. Keep those responses in mind as the reading unfolds.`,
+    ),
+  );
+
+  const next = el("button", "primary", state.cards.length === 3 ? "See your full reading" : "Draw the next card");
+  next.type = "button";
+  next.addEventListener("click", () => {
+    if (state.cards.length === 3) {
+      renderSummary();
+    } else {
+      drawNextCard();
+    }
+  });
+  trial.appendChild(next);
+}
+
+function renderSummary() {
+  progress.textContent = "Your three-card story";
+  trial.hidden = true;
+  summary.hidden = false;
+  summary.replaceChildren(
+    el("h2", "summary-heading", "Your reading"),
+    el(
+      "p",
+      "summary-copy",
+      `For ${state.topic}${state.context ? ` — ${state.context}` : ""}, these cards trace a possible path, not a fixed prediction.`,
+    ),
+  );
+
+  state.cards.forEach((card, index) => {
+    const article = el("article", "reading-card");
+    article.append(
+      el(
+        "h3",
+        null,
+        `${READING_POSITIONS[index]} · ${card.name}${card.reversed ? " (reversed)" : ""}`,
+      ),
+      el("p", "keywords", card.keywords.join(" · ")),
+      el("p", null, selectedMeaning(card)),
+    );
+
+    const cardChoices = state.choices.filter((choice) => choice.card === card.name);
+    const response = cardChoices
+      .map((choice) => `Decision ${choice.decision}: ${choice.reflection}`)
+      .join("; ");
+    article.appendChild(el("p", null, `In this trial, you experienced ${response}.`));
+    summary.appendChild(article);
+  });
+
+  const synthesis = state.score > 1
+    ? "Across the trials, you often leaned toward thoughtful action and staying open to new information."
+    : state.score < -1
+      ? "Across the trials, familiar or avoidant responses appeared more often; notice what feels ready to change, without judging yourself."
+      : "Across the trials, you moved between careful reflection and decisive action, suggesting there may be more than one useful way forward.";
+  summary.appendChild(el("p", "summary-copy", synthesis));
+
+  const restart = el("button", "restart", "Start a new reading");
+  restart.type = "button";
+  restart.addEventListener("click", resetReading);
+  summary.appendChild(restart);
+}
+
+document.getElementById("begin-trial").addEventListener("click", () => {
+  modal.close();
+  progress.textContent = `Card ${state.cards.length} of 3 · ${READING_POSITIONS[state.cards.length - 1]}`;
+  trial.hidden = false;
+  renderDecision();
 });
 
-ensureDeckLoaded().catch(() => {
-  const spread = document.getElementById("spread");
-  spread.textContent =
-    "Could not load cards. Serve this folder with: python3 -m http.server 8000";
+modal.addEventListener("cancel", (event) => event.preventDefault());
+
+form.addEventListener("submit", async (event) => {
+  event.preventDefault();
+  status.textContent = "";
+  startButton.disabled = true;
+
+  try {
+    if (!state.deck.length) state.deck = await loadCards();
+    state.topic = TOPIC_LABELS[document.getElementById("topic").value];
+    state.context = document.getElementById("context").value.trim();
+    state.score = 0;
+    state.cards = [];
+    state.choices = [];
+    startPanel.hidden = true;
+    readingPanel.hidden = false;
+    trial.hidden = false;
+    summary.hidden = true;
+    drawNextCard();
+  } catch (error) {
+    status.textContent = error instanceof Error ? error.message : "Could not start the reading.";
+    startPanel.hidden = false;
+    readingPanel.hidden = true;
+  } finally {
+    startButton.disabled = false;
+  }
 });
