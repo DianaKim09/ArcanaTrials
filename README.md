@@ -6,15 +6,15 @@ An interactive tarot game. You enter short scenarios, play a quick minigame, and
 
 ## Core loop
 
-1. Choose a topic (career, future, love life, personal growth, or a possible change) and optionally add context.
+1. Choose a topic (career, future, love life, personal growth, or a possible change).
 2. Reveal one tarot card and enter its illustrated, first-person scenario.
-3. Meet a character, choose among four responses, and see their reaction; your choice subtly influences the next card.
+3. Meet a character, answer a dilemma written for that card's scenario, and see their reaction; your choice subtly influences the next card.
 4. Complete three scenes, with each card upright or reversed.
-5. Read the three-card interpretation and a recap of your choices and their consequences.
+5. Read the three-card interpretation, tailored advice based on your cards and choices, and a recap of your actions.
 
 ## Status
 
-The prototype supports a complete three-card reading flow. Every tarot card has its own tarot-style illustration, illustrated scenario, and character dialogue. Choose among four responses, see the character react, and let your choices subtly influence the remaining draws.
+The prototype supports a complete three-card reading flow. Every tarot card has its own tarot-style illustration, illustrated scenario, character dialogue, and tailored trial question with four distinct responses. The final reading includes advice shaped by the cards and the suits chosen during the trials.
 
 ## Run it locally
 
@@ -65,7 +65,21 @@ There is no image upload or image-changing control in the game. To change the ar
 }
 ```
 
-Every card already has both fields. Set the card-level `image` to a path such as `"assets/cards/the-fool.png"` to use your tarot artwork in the reveal and reading. Set `scenario.image` to `"assets/scenes/the-fool.png"` to use your scene background behind the character dialogue. Create those folders and add the PNGs yourself. Leave either value as `null` to keep that card's built-in generated illustration. This is an author-side code/data setting; players cannot upload or change images in the game.
+To import a batch of PNGs without editing JSON paths by hand:
+
+1. Put the files in one folder. Name each tarot image after its card, in lowercase with spaces changed to hyphens: `the-fool.png`, `the-magician.png`, `wheel-of-fortune.png`.
+2. If you also have a separate scenario background, add `-scene` before `.png`, for example `the-fool-scene.png`. Scenario images are optional.
+3. Run this command from the project folder, replacing the example path with your image folder:
+
+   ```bash
+   python3 scripts/import_images.py ~/Downloads/tarot-pngs
+   ```
+
+The importer copies tarot art to `assets/cards/`, scenario art to `assets/scenes/`, and fills in the corresponding `image` fields in `data/cards.json`. If you intentionally want to replace images you already imported, add `--overwrite`. To import an individual file, it still needs the same card-based filename. This is a developer tool; players cannot upload or change images in the game.
+
+Expected card-image filenames: `the-fool.png`, `the-magician.png`, `the-high-priestess.png`, `the-empress.png`, `the-emperor.png`, `the-hierophant.png`, `the-lovers.png`, `the-chariot.png`, `strength.png`, `the-hermit.png`, `wheel-of-fortune.png`, `justice.png`, `the-hanged-man.png`, `death.png`, `temperance.png`, `the-devil.png`, `the-tower.png`, `the-star.png`, `the-moon.png`, `the-sun.png`, `judgement.png`, and `the-world.png`.
+
+Alternatively, set a card's top-level `image` path or `scenario.image` path directly in `data/cards.json`. Leave either as `null` to keep the built-in generated illustration.
 
 ## License
 

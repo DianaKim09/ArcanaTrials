@@ -1,331 +1,193 @@
 [
   {
-    "name": "The Fool",
-    "keywords": ["beginnings", "trust", "opportunity"],
-    "upright": "You are stepping into a new chapter with curiosity and courage.",
-    "reversedMeaning": "A leap forward is being blocked by fear or impulsiveness.",
-    "image": null,
+    "name": "Three of Cups",
+    "keywords": ["friendship", "abundance", "celebration"],
+    "upright": "Friendship, abundance, celebration.",
+    "reversedMeaning": "Overindulgence, gossip, or a lack of community support.",
+    "image": "assets/cards/P3ofCups.png",
     "scenario": {
-      "setting": "A cliffside trail forks above a bright valley. A traveler with a worn pack waits beside the first step.",
-      "character": "The traveler",
-      "dialogue": "“No map, no guarantees. Would you take the first step with me?”",
-      "symbol": "➶",
-      "colors": ["#a94e55", "#e4a858"],
+      "setting": "A vibrant gathering where friends raise their cups high to toast a joyous occasion.",
+      "character": "The joyful friend",
+      "dialogue": "“Friendship, abundance, and celebration!”",
+      "trial": {
+        "question": "A guest at the celebration is standing alone while everyone else joins the toast. What do you do?",
+        "choices": [
+          {"suit": "Wands", "text": "Raise your cup and invite the whole room to welcome them into the celebration.", "reflection": "rallying the gathering to welcome the guest", "reaction": "The guest joins the toast, and the room's energy lifts."},
+          {"suit": "Swords", "text": "Ask the host why the guest seems to have been left out.", "reflection": "asking the host why the guest was left out", "reaction": "The host explains the misunderstanding and makes space for the guest."},
+          {"suit": "Cups", "text": "Go over quietly and ask the guest how they are feeling.", "reflection": "checking in with the guest privately", "reaction": "The guest feels noticed and chooses how they want to join in."},
+          {"suit": "Pentacles", "text": "Bring them a drink and introduce them to someone with a shared interest.", "reflection": "helping the guest connect with someone", "reaction": "A new conversation begins, and the guest settles into the celebration."}
+        ]
+      },
+      "symbol": "🍷",
+      "colors": ["#804060", "#4080c0"],
       "image": null
     }
   },
   {
-    "name": "The Magician",
-    "keywords": ["skill", "manifestation", "focus"],
-    "upright": "Your talents and choices can shape the outcome you want.",
-    "reversedMeaning": "Your power is scattered or being misused right now.",
-    "image": null,
+    "name": "Ten of Swords",
+    "keywords": ["completion", "ending", "difficult cycle"],
+    "upright": "Completion, end of a difficult cycle.",
+    "reversedMeaning": "Recovery, regeneration, or resisting inevitable endings.",
+    "image": "assets/cards/P10ofSwords.png",
     "scenario": {
-      "setting": "In a candlelit workshop, a young apprentice faces a table of tools and a device that will not turn on.",
-      "character": "The apprentice",
-      "dialogue": "“I have everything I need, I think. Can you help me find the missing piece?”",
-      "symbol": "✧",
-      "colors": ["#694d9b", "#d39d59"],
+      "setting": "A desolate landscape under a grey sky where a difficult chapter comes to a final close.",
+      "character": "The resting figure",
+      "dialogue": "“Completion, end of a difficult cycle.”",
+      "trial": {
+        "question": "The long struggle is finally over, but the resting traveler does not know what to do next. How do you help?",
+        "choices": [
+          {"suit": "Wands", "text": "Encourage them to choose one hopeful next step and begin when ready.", "reflection": "encouraging one hopeful first step", "reaction": "The traveler finds enough courage to imagine a new beginning."},
+          {"suit": "Swords", "text": "Help them name what has ended and what they learned from it.", "reflection": "reflecting on what ended and what was learned", "reaction": "Putting the experience into words helps the traveler see it more clearly."},
+          {"suit": "Cups", "text": "Sit with them and let them talk about what the ending feels like.", "reflection": "making space for the traveler's feelings", "reaction": "The traveler feels less alone and begins to release some of the weight."},
+          {"suit": "Pentacles", "text": "Help them make a simple plan for rest, food, and tomorrow.", "reflection": "planning a few practical steps for recovery", "reaction": "A manageable plan gives the traveler a steadier place to start."}
+        ]
+      },
+      "symbol": "🗡️",
+      "colors": ["#a05050", "#c0c0c0"],
       "image": null
     }
   },
   {
-    "name": "The High Priestess",
-    "keywords": ["intuition", "mystery", "inner knowing"],
-    "upright": "Trust the quiet wisdom beneath the surface.",
-    "reversedMeaning": "You may be ignoring your instincts or overthinking the answer.",
-    "image": null,
+    "name": "Seven of Cups",
+    "keywords": ["choosing wisely", "reality", "illusion"],
+    "upright": "Choosing wisely, reality vs illusion.",
+    "reversedMeaning": "Clarity, overcoming confusion, or making a grounded decision.",
+    "image": "assets/cards/7ofCups.png",
     "scenario": {
-      "setting": "A moonlit archive is silent except for a sealed letter on the keeper's desk.",
-      "character": "The archive keeper",
-      "dialogue": "“The answer is here, but the letter was not meant for me. What do you sense?”",
-      "symbol": "☾",
-      "colors": ["#29385f", "#8c79ad"],
+      "setting": "A mystical space filled with floating visions and tempting choices shrouded in clouds.",
+      "character": "The seeker",
+      "dialogue": "“Choosing wisely, reality vs illusion.”",
+      "trial": {
+        "question": "The seeker can pursue only one of several dazzling visions. How do you help them choose?",
+        "choices": [
+          {"suit": "Wands", "text": "Choose the vision that excites them most and take the first step toward it.", "reflection": "following the vision that sparks the most excitement", "reaction": "The seeker commits to a direction and turns excitement into momentum."},
+          {"suit": "Swords", "text": "Test each vision against what is actually known, not just what is promised.", "reflection": "checking each vision against the facts", "reaction": "The seeker sees which promises are real and which are only illusions."},
+          {"suit": "Cups", "text": "Ask which possibility feels meaningful, rather than simply impressive.", "reflection": "choosing the possibility that feels most meaningful", "reaction": "The seeker listens inward and recognizes what matters to them."},
+          {"suit": "Pentacles", "text": "Compare the time and effort each path would realistically require.", "reflection": "weighing the practical demands of each path", "reaction": "The seeker finds a grounded option they can follow through on."}
+        ]
+      },
+      "symbol": "☁️",
+      "colors": ["#704070", "#e0c060"],
       "image": null
     }
   },
   {
-    "name": "The Empress",
-    "keywords": ["abundance", "growth", "nurture"],
-    "upright": "Create space for creativity, comfort, and fertile ideas.",
-    "reversedMeaning": "You may be neglecting care, nourishment, or self-worth.",
-    "image": null,
+    "name": "Seven of Wands",
+    "keywords": ["perseverance", "persistence", "holding ground"],
+    "upright": "Perseverance, persistence, holding ground.",
+    "reversedMeaning": "Giving up, feeling overwhelmed, or yielding under pressure.",
+    "image": "assets/cards/P7ofWands.png",
     "scenario": {
-      "setting": "Warm rain taps the greenhouse roof while a gardener kneels beside a row of wilting seedlings.",
-      "character": "The gardener",
-      "dialogue": "“They need more than water. What would help this little patch thrive?”",
-      "symbol": "❋",
-      "colors": ["#38644c", "#c5a45a"],
+      "setting": "A steep hill where a defender stands firm against competing forces.",
+      "character": "The defender",
+      "dialogue": "“Perseverance, persistence, holding ground.”",
+      "trial": {
+        "question": "The defender is tiring as pressure builds on the hill. What would help them hold their ground?",
+        "choices": [
+          {"suit": "Wands", "text": "Call out encouragement and rally nearby allies to reinforce the hill.", "reflection": "rallying allies to reinforce the defender", "reaction": "The defender sees help arriving and regains the will to keep going."},
+          {"suit": "Swords", "text": "Look for the source of the pressure and point out the weakest approach.", "reflection": "finding the weakest approach and warning the defender", "reaction": "The defender focuses on the real threat instead of reacting to every feint."},
+          {"suit": "Cups", "text": "Check whether the defender needs a moment to recover before continuing.", "reflection": "checking on the defender's wellbeing", "reaction": "Feeling supported helps the defender regain composure without shame."},
+          {"suit": "Pentacles", "text": "Help secure the footing and organize a steady, defensible position.", "reflection": "strengthening the defender's position", "reaction": "A more secure position makes it easier for the defender to stay the course."}
+        ]
+      },
+      "symbol": "🪵",
+      "colors": ["#406040", "#a05030"],
       "image": null
     }
   },
   {
-    "name": "The Emperor",
-    "keywords": ["structure", "authority", "boundaries"],
-    "upright": "Clear rules and a steady plan will help you move forward.",
-    "reversedMeaning": "Control or rigidity may be creating unnecessary friction.",
-    "image": null,
+    "name": "Queen of Wands",
+    "keywords": ["passionate", "inspirational", "warm"],
+    "upright": "Passionate, inspirational, warm.",
+    "reversedMeaning": "Demandingness, jealousy, or waning confidence.",
+    "image": "assets/cards/PQueenOfWands.png",
     "scenario": {
-      "setting": "At the city gate, a storm-damaged wall leaves one narrow passage for a line of waiting families.",
-      "character": "The gate captain",
-      "dialogue": "“People need order, but these rules are slowing everyone down. What is fair?”",
-      "symbol": "♜",
-      "colors": ["#53647b", "#b2784e"],
+      "setting": "A sunlit throne room decorated with sunflowers and symbols of vibrant energy.",
+      "character": "The Queen",
+      "dialogue": "“Passionate, inspirational, warm.”",
+      "trial": {
+        "question": "The Queen wants to bring people together around a new idea, but the room is waiting for her lead. What do you suggest?",
+        "choices": [
+          {"suit": "Wands", "text": "Invite everyone to imagine what the idea could become and volunteer to begin.", "reflection": "inspiring the room with a bold invitation", "reaction": "The Queen's confidence catches on, and people begin to contribute."},
+          {"suit": "Swords", "text": "Help her explain the idea clearly and answer the room's questions.", "reflection": "clarifying the idea and addressing questions", "reaction": "Clear answers turn the room's uncertainty into focused interest."},
+          {"suit": "Cups", "text": "Ask who the idea is meant to help and invite their perspective first.", "reflection": "bringing the people affected into the conversation", "reaction": "People feel included, and the Queen shapes the idea with their voices."},
+          {"suit": "Pentacles", "text": "Suggest a small first project so the room can see how the idea works.", "reflection": "starting with a practical demonstration", "reaction": "A small success gives the Queen and the room something solid to build on."}
+        ]
+      },
+      "symbol": "🌻",
+      "colors": ["#d08030", "#503060"],
       "image": null
     }
   },
   {
-    "name": "The Hierophant",
-    "keywords": ["tradition", "guidance", "ritual"],
-    "upright": "Learning from established wisdom can steady your path.",
-    "reversedMeaning": "You may be resisting advice or holding onto outdated systems.",
-    "image": null,
+    "name": "Five of Pentacles",
+    "keywords": ["struggle", "lack", "insecurity"],
+    "upright": "Struggle, lack, insecurity.",
+    "reversedMeaning": "Recovery from financial hardship, improvement, or finding spiritual support.",
+    "image": "assets/cards/P5ofPentacles.png",
     "scenario": {
-      "setting": "In an old hillside shrine, an acolyte prepares a ceremony whose meaning has been forgotten by the village.",
-      "character": "The acolyte",
-      "dialogue": "“We have always done it this way. Should we keep the custom or ask why it began?”",
-      "symbol": "♧",
-      "colors": ["#65517f", "#c09a64"],
+      "setting": "A snowy street outside a warmly lit stained-glass window where two figures walk in hardship.",
+      "character": "The wanderer",
+      "dialogue": "“Struggle, lack, insecurity.”",
+      "trial": {
+        "question": "Two travelers pause outside a warm, brightly lit shelter, unsure whether they should ask for help. What do you do?",
+        "choices": [
+          {"suit": "Wands", "text": "Knock on the door with them and ask the community to make room.", "reflection": "speaking up so the travelers can enter the shelter", "reaction": "The door opens, and the travelers no longer have to face the cold alone."},
+          {"suit": "Swords", "text": "Find out what help is available and explain the travelers' options clearly.", "reflection": "finding out what support is available", "reaction": "Knowing their options helps the travelers decide what they need."},
+          {"suit": "Cups", "text": "Approach gently, offer company, and let them tell you what they need.", "reflection": "offering companionship and listening", "reaction": "The travelers feel seen and can ask for help in their own words."},
+          {"suit": "Pentacles", "text": "Help them get inside, warm up, and find practical supplies for the night.", "reflection": "helping the travelers meet their immediate needs", "reaction": "Warmth and useful supplies give the travelers a little room to recover."}
+        ]
+      },
+      "symbol": "❄️",
+      "colors": ["#903040", "#d0c070"],
       "image": null
     }
   },
   {
-    "name": "The Lovers",
-    "keywords": ["choice", "union", "alignment"],
-    "upright": "A meaningful decision is asking for honesty and clarity.",
-    "reversedMeaning": "Misalignment or conflict is clouding a key relationship.",
-    "image": null,
+    "name": "Eight of Pentacles",
+    "keywords": ["hard work", "dedication", "skill", "talent"],
+    "upright": "Hard work, dedication, skill, talent.",
+    "reversedMeaning": "Perfectionism, lack of focus, or working without passion.",
+    "image": "assets/cards/P8ofPentacles.png",
     "scenario": {
-      "setting": "Two siblings stand on either side of their late parent's little bookshop, each holding a different key.",
-      "character": "The siblings",
-      "dialogue": "“We both love this place, but want different futures for it. Will you hear us out?”",
-      "symbol": "♡",
-      "colors": ["#824d70", "#d7a06f"],
+      "setting": "A quiet workshop where a craftsman meticulously carves pentacles into wood.",
+      "character": "The craftsman",
+      "dialogue": "“Hard work, dedication, skill, talent.”",
+      "trial": {
+        "question": "The craftsman spots a flaw in a nearly finished carving. How do you help them decide what to do?",
+        "choices": [
+          {"suit": "Wands", "text": "Encourage them to try a creative repair instead of starting over.", "reflection": "trying a creative way to repair the carving", "reaction": "The craftsman experiments with a fresh approach and finds new confidence."},
+          {"suit": "Swords", "text": "Examine the flaw together and figure out what caused it.", "reflection": "studying the flaw to understand its cause", "reaction": "The craftsman learns what went wrong and can make a clear decision."},
+          {"suit": "Cups", "text": "Remind them that one mistake does not erase the care in their work.", "reflection": "reassuring the craftsman and recognizing their effort", "reaction": "The craftsman relaxes enough to consider the work with fresh eyes."},
+          {"suit": "Pentacles", "text": "Work out how much time a careful repair will take before changing anything.", "reflection": "planning a careful repair within the time available", "reaction": "A measured repair protects the work and keeps the craftsman's deadline in view."}
+        ]
+      },
+      "symbol": "⭐",
+      "colors": ["#603040", "#e0b040"],
       "image": null
     }
   },
   {
-    "name": "The Chariot",
-    "keywords": ["drive", "momentum", "willpower"],
-    "upright": "Focus and determination are carrying you toward success.",
-    "reversedMeaning": "Stalled energy or lack of direction is slowing the journey.",
-    "image": null,
+    "name": "Two of Swords",
+    "keywords": ["indecision", "uncertainty", "doubt"],
+    "upright": "Indecision, uncertainty, doubt.",
+    "reversedMeaning": "Information overload, breaking a stalemate, or forced clarity.",
+    "image": "assets/cards/P2ofSwords.png",
     "scenario": {
-      "setting": "At a rain-slick crossroads, a courier's overloaded cart points toward two urgent deliveries.",
-      "character": "The courier",
-      "dialogue": "“I can only get one there in time. Which way should I steer?”",
-      "symbol": "➤",
-      "colors": ["#4b6186", "#c6864e"],
-      "image": null
-    }
-  },
-  {
-    "name": "Strength",
-    "keywords": ["courage", "gentleness", "resilience"],
-    "upright": "Calm confidence will win more than force alone.",
-    "reversedMeaning": "You may be trying to push through without rest or compassion.",
-    "image": null,
-    "scenario": {
-      "setting": "A frightened horse trembles in a stable as thunder rolls outside. Its caretaker keeps a careful distance.",
-      "character": "The caretaker",
-      "dialogue": "“It will not come close. Can you help me make it feel safe?”",
-      "symbol": "♌",
-      "colors": ["#765240", "#c99c6b"],
-      "image": null
-    }
-  },
-  {
-    "name": "The Hermit",
-    "keywords": ["reflection", "solitude", "guidance"],
-    "upright": "Take time away from noise to hear your deeper truth.",
-    "reversedMeaning": "Isolation is preventing you from seeing the bigger picture.",
-    "image": null,
-    "scenario": {
-      "setting": "High in the mountains, a lighthouse keeper tends a beacon that has gone dark on a foggy night.",
-      "character": "The keeper",
-      "dialogue": "“I have worked alone for years. Tonight, I could use another pair of hands.”",
-      "symbol": "♙",
-      "colors": ["#40556a", "#b3a173"],
-      "image": null
-    }
-  },
-  {
-    "name": "Wheel of Fortune",
-    "keywords": ["cycles", "luck", "change"],
-    "upright": "A turning point is coming and will move things unexpectedly.",
-    "reversedMeaning": "You may be resisting a change that is already underway.",
-    "image": null,
-    "scenario": {
-      "setting": "At the market, a broken prize wheel spins in the wind while vendors wait to hear whether the fair can continue.",
-      "character": "The fair organizer",
-      "dialogue": "“The old plan has fallen apart. Do we repair it or try something new?”",
-      "symbol": "◉",
-      "colors": ["#76603e", "#bd7356"],
-      "image": null
-    }
-  },
-  {
-    "name": "Justice",
-    "keywords": ["truth", "balance", "accountability"],
-    "upright": "Clear decisions and honest review will bring fairness.",
-    "reversedMeaning": "A hidden truth or unfair bias needs to be confronted.",
-    "image": null,
-    "scenario": {
-      "setting": "Two witnesses disagree in a quiet town hall, and a judge pauses before delivering a verdict.",
-      "character": "The judge",
-      "dialogue": "“Both stories sound certain. What should I ask before I decide?”",
-      "symbol": "⚖",
-      "colors": ["#425274", "#c1a35c"],
-      "image": null
-    }
-  },
-  {
-    "name": "The Hanged Man",
-    "keywords": ["pause", "release", "perspective"],
-    "upright": "Letting go of urgency can reveal the answer you need.",
-    "reversedMeaning": "Stubbornness is keeping you stuck in a difficult pause.",
-    "image": null,
-    "scenario": {
-      "setting": "A flooded orchard has trapped a farmer in the upper branches of an old tree.",
-      "character": "The farmer",
-      "dialogue": "“I can wait for the water to drop, or risk climbing down. What do you see?”",
-      "symbol": "⟲",
-      "colors": ["#4d694e", "#7e9db4"],
-      "image": null
-    }
-  },
-  {
-    "name": "Death",
-    "keywords": ["transformation", "ending", "renewal"],
-    "upright": "A chapter is closing so a stronger one can begin.",
-    "reversedMeaning": "An ending is being delayed or avoided instead of honored.",
-    "image": null,
-    "scenario": {
-      "setting": "The last curtain falls in a small theater scheduled to close, and the stagehand gathers the final props.",
-      "character": "The stagehand",
-      "dialogue": "“The show is over. Which part should we carry with us into whatever comes next?”",
-      "symbol": "✥",
-      "colors": ["#604963", "#b87863"],
-      "image": null
-    }
-  },
-  {
-    "name": "Temperance",
-    "keywords": ["balance", "healing", "patience"],
-    "upright": "Steady moderation will help everything settle into place.",
-    "reversedMeaning": "Extremes or inconsistency are making the path harder.",
-    "image": null,
-    "scenario": {
-      "setting": "In an apothecary, two jars of ingredients sit open beside a healer trying to mix a soothing remedy.",
-      "character": "The healer",
-      "dialogue": "“Too much of either will make it worse. How should I find the right measure?”",
-      "symbol": "⚗",
-      "colors": ["#55746d", "#b59b60"],
-      "image": null
-    }
-  },
-  {
-    "name": "The Devil",
-    "keywords": ["attachment", "shadow", "pattern"],
-    "upright": "A habit or fear may be keeping you from freedom.",
-    "reversedMeaning": "You are beginning to break unhealthy patterns and reclaim power.",
-    "image": null,
-    "scenario": {
-      "setting": "Deep in a mine, a foreman finds a ledger showing that workers are bound by a debt they cannot repay.",
-      "character": "The foreman",
-      "dialogue": "“This bargain keeps everyone trapped. What would it take to break the pattern?”",
-      "symbol": "⛓",
-      "colors": ["#473a50", "#a55e48"],
-      "image": null
-    }
-  },
-  {
-    "name": "The Tower",
-    "keywords": ["disruption", "awakening", "truth"],
-    "upright": "A sudden shake-up can clear away what no longer fits.",
-    "reversedMeaning": "You may be bracing for change without yet accepting it.",
-    "image": null,
-    "scenario": {
-      "setting": "After a lightning strike cracks the old bell tower, a mason points to a safer path through the square.",
-      "character": "The mason",
-      "dialogue": "“The old tower will not stand. How do we get everyone clear and begin again?”",
-      "symbol": "ϟ",
-      "colors": ["#46506d", "#c2674d"],
-      "image": null
-    }
-  },
-  {
-    "name": "The Star",
-    "keywords": ["hope", "healing", "vision"],
-    "upright": "A hopeful path is opening, even if the next step is unclear.",
-    "reversedMeaning": "You may be doubting your own ability to recover or dream boldly.",
-    "image": null,
-    "scenario": {
-      "setting": "On the roof of an observatory, a young astronomer searches the clearing sky for one familiar star.",
-      "character": "The astronomer",
-      "dialogue": "“The clouds are finally lifting. Which direction should we look first?”",
-      "symbol": "✦",
-      "colors": ["#334b70", "#7d91b7"],
-      "image": null
-    }
-  },
-  {
-    "name": "The Moon",
-    "keywords": ["uncertainty", "dreams", "intuition"],
-    "upright": "Not everything is clear yet; let the fog reveal what it can.",
-    "reversedMeaning": "Confusion is lifting and truth is becoming easier to see.",
-    "image": null,
-    "scenario": {
-      "setting": "Fog closes around a marsh ferry as its keeper hears an uncertain bell from somewhere across the water.",
-      "character": "The ferry keeper",
-      "dialogue": "“I cannot see the shore. Do we wait for the fog to pass, or trust the sound?”",
-      "symbol": "☽",
-      "colors": ["#39455f", "#8586a7"],
-      "image": null
-    }
-  },
-  {
-    "name": "The Sun",
-    "keywords": ["joy", "clarity", "success"],
-    "upright": "Warmth, confidence, and visibility are in your favor.",
-    "reversedMeaning": "You may be dimming your own light or avoiding celebration.",
-    "image": null,
-    "scenario": {
-      "setting": "A village festival fills the sunlit square while a baker brings out the first loaf from a new oven.",
-      "character": "The baker",
-      "dialogue": "“The whole town helped build this. Who should we invite to share the first slice?”",
-      "symbol": "☼",
-      "colors": ["#b77343", "#edcc70"],
-      "image": null
-    }
-  },
-  {
-    "name": "Judgement",
-    "keywords": ["awakening", "reckoning", "purpose"],
-    "upright": "A call to act with integrity is worth answering now.",
-    "reversedMeaning": "You may be resisting an honest evaluation or a necessary reset.",
-    "image": null,
-    "scenario": {
-      "setting": "A messenger returns to the town square with news that may change a decision everyone thought was final.",
-      "character": "The messenger",
-      "dialogue": "“There is still time to answer the call. Are we ready to hear what has changed?”",
-      "symbol": "♬",
-      "colors": ["#68516d", "#d6ad68"],
-      "image": null
-    }
-  },
-  {
-    "name": "The World",
-    "keywords": ["completion", "fulfillment", "integration"],
-    "upright": "You are arriving at a meaningful completion and new wholeness.",
-    "reversedMeaning": "A finishing cycle may be delayed until you fully integrate the lesson.",
-    "image": null,
-    "scenario": {
-      "setting": "At the harbor's edge, a mapmaker lays out a chart joining routes from every place you have visited.",
-      "character": "The mapmaker",
-      "dialogue": "“The journey brought us all here. Where should the next map begin?”",
-      "symbol": "◎",
-      "colors": ["#3d6b70", "#d1aa65"],
+      "setting": "A calm body of water beneath a crescent moon where a blindfolded figure sits holding crossed swords.",
+      "character": "The blindfolded figure",
+      "dialogue": "“Indecision, uncertainty, doubt.”",
+      "trial": {
+        "question": "The blindfolded figure must choose between two paths but cannot see what lies ahead. What do you do?",
+        "choices": [
+          {"suit": "Wands", "text": "Encourage them to remove the blindfold and take a brave first look.", "reflection": "encouraging the figure to face the choice directly", "reaction": "The figure gathers courage to look at the decision rather than avoid it."},
+          {"suit": "Swords", "text": "Help them gather the facts they are missing before choosing.", "reflection": "seeking the information needed to decide", "reaction": "New information helps the figure compare the paths more clearly."},
+          {"suit": "Cups", "text": "Ask what each path means to them and listen without pushing.", "reflection": "listening to what each path means to the figure", "reaction": "The figure feels safe enough to acknowledge their true feelings."},
+          {"suit": "Pentacles", "text": "Explore what each path would require in practical, everyday terms.", "reflection": "comparing the practical demands of each path", "reaction": "Considering the real steps ahead helps the figure make a grounded choice."}
+        ]
+      },
+      "symbol": "⚔️",
+      "colors": ["#c07090", "#305070"],
       "image": null
     }
   }

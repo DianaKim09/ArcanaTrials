@@ -13,6 +13,19 @@ assert.ok(deck.every((card) => (
   typeof card.scenario?.setting === 'string'
   && typeof card.scenario?.character === 'string'
   && typeof card.scenario?.dialogue === 'string'
+  && typeof card.scenario?.trial?.question === 'string'
+  && card.scenario.trial.question.length > 0
+  && Array.isArray(card.scenario.trial.choices)
+  && card.scenario.trial.choices.length === 4
+  && new Set(card.scenario.trial.choices.map((choice) => choice.suit)).size === 4
+  && new Set(card.scenario.trial.choices.map((choice) => choice.text)).size === 4
+  && card.scenario.trial.choices.every((choice) => (
+    ['Wands', 'Swords', 'Cups', 'Pentacles'].includes(choice.suit)
+    && typeof choice.text === 'string'
+    && choice.text.length > 0
+    && typeof choice.reflection === 'string'
+    && typeof choice.reaction === 'string'
+  ))
   && card.scenario?.symbol
   && Array.isArray(card.scenario?.colors)
   && card.scenario.colors.length === 2

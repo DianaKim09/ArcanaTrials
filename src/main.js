@@ -1,11 +1,13 @@
 import { POSITIONS, drawWeightedCard, loadCards } from "./tarot.js";
 
+//summary area sections
 const READING_POSITIONS = [
   "What shaped you",
   "What you're facing",
   "Where your choices lead",
 ];
 
+// drop down labels for the topic select menu
 const TOPIC_LABELS = {
   career: "your career",
   future: "your future",
@@ -14,43 +16,26 @@ const TOPIC_LABELS = {
   change: "a change you're considering",
 };
 
-const SCENE_CHOICES = [
-  {
-    suit: "Wands",
-    text: "Take a bold first step and invite others to join you.",
-    reflection: "taking a bold first step and inviting others to join",
-    reaction: () => "Your bold move shifts the mood. They find the courage to follow your lead.",
-  },
-  {
-    suit: "Swords",
-    text: "Ask a direct question and look for the clearest facts.",
-    reflection: "asking a direct question and looking for clear facts",
-    reaction: () => "They consider your questions and help separate what is known from what is feared.",
-  },
-  {
-    suit: "Cups",
-    text: "Listen to those affected and respond with compassion.",
-    reflection: "listening to those affected and responding with compassion",
-    reaction: () => "They feel heard and begin to share what they truly need.",
-  },
-  {
-    suit: "Pentacles",
-    text: "Make a practical plan and work through it one step at a time.",
-    reflection: "making a practical plan and taking steady steps",
-    reaction: () => "They help turn your careful plan into something real and dependable.",
-  },
-];
+const ADVICE_BY_SUIT = {
+  Wands: "Choose one promising idea and take a small first step toward it.",
+  Swords: "Separate what you know from what you assume, then make a clear decision.",
+  Cups: "Keep listening to your feelings and the people affected, while making room for your own needs.",
+  Pentacles: "Turn what you have learned into a practical next step you can sustain.",
+};
 
+// contains the current state of the reading
+// such as (deck of cards, selected topic,
+//  scores for each suit, cards drawn, choices made,
+//  & the current card being displayed.
 const state = {
   deck: [],
   topic: "",
-  context: "",
   suitScores: Object.fromEntries(POSITIONS.map((suit) => [suit, 0])),
   cards: [],
   choices: [],
   currentCard: null,
 };
-
+//identifies the elements that will be used display the visuals
 const startPanel = document.getElementById("start-panel");
 const readingPanel = document.getElementById("reading-panel");
 const progress = document.getElementById("progress");
@@ -61,6 +46,7 @@ const form = document.getElementById("reading-form");
 const startButton = document.getElementById("start-reading");
 const modal = document.getElementById("card-modal");
 
+// creates a new HTML element with the specified tag,  class name, and text content
 function el(tag, className, text) {
   const node = document.createElement(tag);
   if (className) node.className = className;
@@ -72,6 +58,7 @@ function selectedMeaning(card) {
   return card.reversed ? card.reversedMeaning : card.upright;
 }
 
+// generates an SVG image for a scene based on its colors and symbol
 function sceneArtwork(scene) {
   const [start, end] = scene.colors;
   const svg = `
@@ -99,46 +86,19 @@ function sceneArtwork(scene) {
     </svg>`;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
 }
-
-function cardArtwork(card) {
-  const [start, end] = card.scenario.colors;
-  const title = card.name.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
-  const svg = `
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 540">
-      <defs>
-        <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
-          <stop offset="0" stop-color="${start}"/>
-          <stop offset="1" stop-color="${end}"/>
-        </linearGradient>
-        <radialGradient id="light">
-          <stop stop-color="#fff4cb" stop-opacity=".65"/>
-          <stop offset="1" stop-color="#fff4cb" stop-opacity="0"/>
-        </radialGradient>
-      </defs>
-      <rect width="360" height="540" rx="22" fill="#171326"/>
-      <rect x="12" y="12" width="336" height="516" rx="18" fill="url(#card)"/>
-      <circle cx="180" cy="230" r="154" fill="url(#light)"/>
-      <rect x="27" y="27" width="306" height="486" rx="14" fill="none" stroke="#fff0bd" stroke-opacity=".78" stroke-width="2"/>
-      <path d="M52 347 Q112 278 180 326 T308 311 V469 H52Z" fill="#17152c" fill-opacity=".44"/>
-      <path d="M52 388 Q124 329 184 373 T308 358 V469 H52Z" fill="#17152c" fill-opacity=".6"/>
-      <circle cx="180" cy="222" r="91" fill="#17152c" fill-opacity=".18" stroke="#fff0bd" stroke-opacity=".8" stroke-width="2"/>
-      <text x="180" y="255" text-anchor="middle" font-size="104" fill="#fff4cb" font-family="Georgia,serif">${card.scenario.symbol}</text>
-      <path d="M154 469 Q161 396 180 380 Q199 396 206 469Z" fill="#17152c" fill-opacity=".76"/>
-      <circle cx="180" cy="374" r="19" fill="#17152c" fill-opacity=".8"/>
-      <path d="M68 489 H292" stroke="#fff0bd" stroke-opacity=".65"/>
-      <text x="180" y="496" text-anchor="middle" font-size="16" letter-spacing="2" fill="#fff4cb" font-family="Georgia,serif">${title}</text>
-    </svg>`;
-  return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
-}
-
+// sets the source
+// text for an image element
 function setImageSource(image, source, alt) {
   image.alt = alt;
   image.onerror = () => {
+    //handles errors if the image cannot be loaded
     status.textContent = `Could not load image "${source}". Check that the path in cards.json is correct.`;
   };
   image.src = source;
 }
 
+// creates a visual representation of a card's scenario
+// including the scene's image and dialogue
 function storyVisual(card, dialogue = card.scenario.dialogue) {
   const scene = card.scenario;
   const figure = el("figure", "story-visual");
@@ -148,15 +108,18 @@ function storyVisual(card, dialogue = card.scenario.dialogue) {
   art.height = 400;
 
   const frame = el("div", "scene-frame");
-  const bubble = el("div", "dialogue-bubble");
-  bubble.setAttribute("aria-label", `${scene.character} says: ${dialogue}`);
-  const copy = el("span", "dialogue-copy");
-  copy.append(
-    el("span", "npc-label", scene.character),
-    el("span", "dialogue-line", dialogue),
-  );
-  bubble.append(el("span", "character-avatar", scene.symbol), copy);
-  frame.append(art, bubble);
+  frame.append(art);
+  if (dialogue) {
+    const bubble = el("div", "dialogue-bubble");
+    bubble.setAttribute("aria-label", `${scene.character} says: ${dialogue}`);
+    const copy = el("span", "dialogue-copy");
+    copy.append(
+      el("span", "npc-label", scene.character),
+      el("span", "dialogue-line", dialogue),
+    );
+    bubble.append(el("span", "character-avatar", scene.symbol), copy);
+    frame.appendChild(bubble);
+  }
 
   figure.append(
     frame,
@@ -165,9 +128,9 @@ function storyVisual(card, dialogue = card.scenario.dialogue) {
   return figure;
 }
 
+
 function resetReading() {
   state.topic = "";
-  state.context = "";
   state.suitScores = Object.fromEntries(POSITIONS.map((suit) => [suit, 0]));
   state.cards = [];
   state.choices = [];
@@ -181,6 +144,8 @@ function resetReading() {
   status.textContent = "";
 }
 
+//gets elements from the DOM node (an element object)
+// and displays the card popup with the card's details and scenario
 function showCardPopup(card, index) {
   state.currentCard = card;
 
@@ -188,14 +153,16 @@ function showCardPopup(card, index) {
     `Card ${index + 1} of 3 · ${READING_POSITIONS[index]}`;
   document.getElementById("modal-card-name").textContent =
     `${card.name}${card.reversed ? " (reversed)" : ""}`;
-  document.getElementById("modal-keywords").textContent = card.keywords.join(" · ");
   document.getElementById("modal-meaning").textContent = selectedMeaning(card);
   const tarotArt = document.getElementById("modal-tarot-art");
-  tarotArt.hidden = false;
+  tarotArt.hidden = !card.image;
   tarotArt.removeAttribute("src");
-  setImageSource(tarotArt, card.image || cardArtwork(card), `Illustration of ${card.name}`);
+  if (card.image) setImageSource(tarotArt, card.image, `Illustration of ${card.name}`);
   const modalScene = document.getElementById("modal-scene");
-  modalScene.replaceChildren(storyVisual(card));
+  const dialogue = card.scenario.dialogue === selectedMeaning(card)
+    ? ""
+    : card.scenario.dialogue;
+  modalScene.replaceChildren(storyVisual(card, dialogue));
 
   if (!modal.open) modal.showModal();
 }
@@ -209,14 +176,11 @@ function drawNextCard() {
 
 function renderDecision() {
   const card = state.currentCard;
-  const choices = SCENE_CHOICES.map((choice) => ({
-    ...choice,
-    reaction: choice.reaction(),
-  }));
+  const { question, choices } = card.scenario.trial;
 
   trial.replaceChildren(
     el("h2", "trial-heading", `You are there · ${card.name}'s trial`),
-    el("p", "prompt", `You are making a choice about ${state.topic}. What do you do?`),
+    el("p", "prompt", question),
     storyVisual(card),
   );
 
@@ -257,6 +221,37 @@ function recordChoice(choice) {
   trial.appendChild(next);
 }
 
+function naturalList(items) {
+  if (items.length < 2) return items[0] || "";
+  if (items.length === 2) return `${items[0]} and ${items[1]}`;
+  return `${items.slice(0, -1).join(", ")}, and ${items.at(-1)}`;
+}
+
+function createReadingAdvice() {
+  const counts = Object.fromEntries(POSITIONS.map((suit) => [suit, 0]));
+  state.choices.forEach((choice) => {
+    counts[choice.suit] += 1;
+  });
+
+  const highestCount = Math.max(...Object.values(counts));
+  const leadingSuits = POSITIONS.filter((suit) => counts[suit] === highestCount);
+  const drawnCards = state.cards.map((card) => (
+    `${card.name}${card.reversed ? " (reversed)" : ""}`
+  ));
+  const cardThemes = state.cards.map((card) => card.keywords[0]);
+  const actionPattern = state.choices.map((choice) => choice.reflection);
+  const choiceFeedback = leadingSuits.length > 1
+    ? `Your choices leaned equally toward ${naturalList(leadingSuits)} (${highestCount} decision${highestCount === 1 ? "" : "s"} each).`
+    : `Your choices leaned most toward ${leadingSuits[0]} (${highestCount} of ${state.choices.length} decisions).`;
+
+  return [
+    `Your spread includes ${naturalList(drawnCards)}, bringing themes of ${naturalList(cardThemes)}.`,
+    `${choiceFeedback} Your actions included ${naturalList(actionPattern)}.`,
+    leadingSuits.map((suit) => ADVICE_BY_SUIT[suit]).join(" "),
+  ];
+}
+
+//same thing uses dom
 function renderSummary() {
   progress.textContent = "Your three-card story";
   trial.hidden = true;
@@ -266,9 +261,19 @@ function renderSummary() {
     el(
       "p",
       "summary-copy",
-      `For ${state.topic}${state.context ? ` — ${state.context}` : ""}, these cards trace a possible path, not a fixed prediction.`,
+      `For ${state.topic}, these cards trace a possible path, not a fixed prediction.`,
     ),
   );
+
+  const advice = el("section", "advice-panel");
+  const adviceHeading = el("h3", null, "Advice");
+  adviceHeading.id = "advice-title";
+  advice.setAttribute("aria-labelledby", adviceHeading.id);
+  advice.append(adviceHeading);
+  createReadingAdvice().forEach((text) => {
+    advice.appendChild(el("p", null, text));
+  });
+  summary.appendChild(advice);
 
   state.cards.forEach((card, index) => {
     const article = el("article", "reading-card");
@@ -279,9 +284,6 @@ function renderSummary() {
         `${READING_POSITIONS[index]} · ${card.name}${card.reversed ? " (reversed)" : ""}`,
       ),
     );
-    const art = el("img", "tarot-art");
-    setImageSource(art, card.image || cardArtwork(card), `Illustration of ${card.name}`);
-    article.appendChild(art);
     article.append(
       el("p", "keywords", card.keywords.join(" · ")),
       storyVisual(
@@ -290,12 +292,17 @@ function renderSummary() {
       ),
       el("p", null, selectedMeaning(card)),
     );
+    if (card.image) {
+      const art = el("img", "tarot-art");
+      setImageSource(art, card.image, `Illustration of ${card.name}`);
+      article.appendChild(art);
+    }
 
     const cardChoices = state.choices.filter((choice) => choice.card === card.name);
     const response = cardChoices
       .map((choice) => choice.reflection)
       .join("; ");
-    article.appendChild(el("p", null, `You chose ${response}.`));
+    article.appendChild(el("p", null, `Your response: ${response}.`));
     summary.appendChild(article);
   });
 
@@ -322,7 +329,6 @@ form.addEventListener("submit", async (event) => {
   try {
     if (!state.deck.length) state.deck = await loadCards();
     state.topic = TOPIC_LABELS[document.getElementById("topic").value];
-    state.context = document.getElementById("context").value.trim();
     state.suitScores = Object.fromEntries(POSITIONS.map((suit) => [suit, 0]));
     state.cards = [];
     state.choices = [];

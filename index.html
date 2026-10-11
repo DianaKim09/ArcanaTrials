@@ -27,10 +27,6 @@
             <option value="change">What about a change I'm considering?</option>
           </select>
         </div>
-        <div class="field">
-          <label for="context">Add a little context <span>(optional)</span></label>
-          <input id="context" name="context" maxlength="120" autocomplete="off" placeholder="A question or scenario on your mind">
-        </div>
         <button class="primary" id="start-reading" type="submit">Begin your reading</button>
       </form>
     </section>
@@ -48,15 +44,14 @@
   <dialog id="card-modal" aria-labelledby="modal-card-name">
     <div class="popup">
       <p id="modal-position" class="popup-position"></p>
-      <img id="modal-tarot-art" class="tarot-art" alt="" hidden>
       <div id="modal-scene"></div>
       <h2 id="modal-card-name"></h2>
-      <p id="modal-keywords" class="keywords"></p>
       <p id="modal-meaning" class="meaning"></p>
+      <img id="modal-tarot-art" class="tarot-art" alt="" hidden>
       <button id="begin-trial" type="button">Begin this card's trial</button>
     </div>
   </dialog>
 
-  <script type="module" src="src/main.js"></script>
+  <script type="module" src="src/main.js?v=reading-advice-2"></script>
 </body>
 </html>
