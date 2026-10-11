@@ -1,7 +1,7 @@
 :root {
   color-scheme: dark;
-  --bg: #14101f;
-  --panel: #201832;
+  --bg: #211c38;
+  --panel: #211832;
   --card: #2a1f45;
   --gold: #e8c872;
   --text: #efe8ff;
@@ -141,15 +141,6 @@ button:disabled { opacity: .6; cursor: wait; }
   border-radius: 12px;
   background: #1c1530;
 }
-.advice-panel {
-  margin: 20px 0;
-  padding: 20px;
-  border: 1px solid var(--gold);
-  border-radius: 12px;
-  background: #1c1530;
-}
-.advice-panel h3 { color: var(--gold); margin: 0 0 8px; }
-.advice-panel p { line-height: 1.5; margin: 8px 0 0; }
 .reading-card h3 { color: var(--gold); margin: 0 0 8px; }
 .reading-card p { line-height: 1.5; margin: 8px 0 0; }
 .reading-card .keywords { color: var(--muted); font-style: italic; }

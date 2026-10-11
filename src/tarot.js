@@ -1,5 +1,7 @@
-export const POSITIONS = ["Wands", "Swords", "Cups", "Pentacles"];
+export const POSITIONS = ["Wands", "Swords", "Cups", "Pentacles"]; //arrays
 
+
+//lists of keywords that correspond w/ each suit
 const SUIT_KEYWORDS = {
   Wands: new Set([
     "beginnings", "opportunity", "courage", "willpower", "vision", "success",
@@ -44,7 +46,7 @@ export function drawCards(deck, n = 3) {
       reversed: Math.random() < 0.35,
     }));
 }
-
+//attributes for the cards
 const UPLIFTING_KEYWORDS = new Set([
   "beginnings", "trust", "opportunity", "skill", "focus", "abundance", "growth",
   "nurture", "courage", "resilience", "guidance", "willpower", "cycles", "balance",
@@ -52,6 +54,7 @@ const UPLIFTING_KEYWORDS = new Set([
   "completion", "fulfillment", "integration", "patience", "manifestation",
 ]);
 
+//more attributes for the cards
 const CHALLENGING_KEYWORDS = new Set([
   "fear", "impulsiveness", "blocked", "misused", "rigidity", "conflict", "stalled",
   "isolation", "unfair", "stubbornness", "avoided", "attachment", "shadow",

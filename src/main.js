@@ -1,6 +1,6 @@
 import { POSITIONS, drawWeightedCard, loadCards } from "./tarot.js";
 
-//summary area sections
+//summary area sections , aslo shown in the tarot card area pop up
 const READING_POSITIONS = [
   "What shaped you",
   "What you're facing",
@@ -59,7 +59,8 @@ function selectedMeaning(card) {
   return card.reversed ? card.reversedMeaning : card.upright;
 }
 
-// generates an SVG image for a scene based on its colors and symbol
+// generates an SVG  image for a scene based on its colors and symbol
+// (scalable vector graphic) --> idsplays 2d grpahics on web
 function sceneArtwork(scene) {
   const [start, end] = scene.colors;
   const svg = `
@@ -146,7 +147,7 @@ function resetReading() {
 }
 
 //gets elements from the DOM node (an element object)
-// and displays the card popup with the card's details and scenario
+// and displays the card popup with the card's details n scenario
 function showCardPopup(card, index) {
   state.currentCard = card;
 
