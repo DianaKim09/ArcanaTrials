@@ -16,6 +16,7 @@ const TOPIC_LABELS = {
   change: "a change you're considering",
 };
 
+//advice given based on the suite that was chosen most
 const ADVICE_BY_SUIT = {
   Wands: "Choose one promising idea and take a small first step toward it.",
   Swords: "Separate what you know from what you assume, then make a clear decision.",
